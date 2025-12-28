@@ -1,0 +1,9 @@
+{
+  "name": "Blackbook Barber",
+  "short_name": "Blackbook",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#f6c12c",
+  "icons": []
+}
