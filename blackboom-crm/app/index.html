@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
+        <meta name="google-site-verification" content="google946d91b92ae68f5c.html">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>BlackBook - Barber OS</title>
-    
+        <title>BlackBook — Barber OS: Book. Manage. Grow.</title>
+
+        <!-- SEO: catchy description, canonical, Open Graph, Twitter Card -->
+        <meta name="description" content="BlackBook — the barber's secret weapon. Effortless bookings, secure payments, and simple CRM so you can focus on your craft and grow your business.">
+        <link rel="canonical" href="https://blackbookcrm.org/">
+        <meta property="og:title" content="BlackBook — Barber OS: Book. Manage. Grow.">
+        <meta property="og:description" content="Turn bookings into business. Streamline scheduling, payments, and client relationships with BlackBook — crafted for elite barbers who want to scale.">
+        <meta property="og:url" content="https://blackbookcrm.org/">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="https://blackbookcrm.org/seo-image.png">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="BlackBook — Barber OS: Book. Manage. Grow.">
+        <meta name="twitter:description" content="Effortless bookings, smarter client management, and payments that just work — BlackBook helps barbers build a better business.">
+        <meta name="twitter:image" content="https://blackbookcrm.org/seo-image.png">
+
+        <!-- Structured data (JSON-LD) -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "BlackBook",
+            "url": "https://blackbookcrm.org/",
+            "image": ["https://blackbookcrm.org/seo-image.png"],
+            "description": "Effortless bookings, smarter client management, and payments that just work — BlackBook helps barbers build a better business.",
+            "sameAs": ["https://www.facebook.com/yourpage", "https://www.instagram.com/yourpage"]
+        }
+        </script>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -12,7 +38,10 @@
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3594/3594107.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#d4af37">
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3594/3594107.png" sizes="192x192">
+    <meta property="og:image" content="https://blackbookcrm.org/seo-image.png">
+    <link rel="icon" href="/favicon.png" sizes="192x192">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
@@ -30,7 +59,7 @@
             --space-1: 8px;
             --space-2: 16px;
             --radius: 12px;
-            --max-width: 450px;
+            --max-width: 720px;
         }
 
         
@@ -59,9 +88,13 @@
         .chat-bubble-them { background: var(--muted); color: white; border-bottom-left-radius: 0; }
         .service-card { transition: transform .12s ease, box-shadow .12s ease; border: 1px solid var(--muted); }
         .service-card.selected { border-color: var(--gold); background: rgba(201,164,58,0.12); box-shadow: 0 4px 18px rgba(0,0,0,0.6); }
-        .badge-nav { position: absolute; top: 0; right: 20%; width: 8px; height: 8px; background-color: #ef4444; border-radius: 50%; border: 1px solid black; }
+        .badge-nav { display: none !important; }
+        /* Normalize tab icons so labels align consistently */
+        nav > button > *:first-child { width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; }
+        nav > button svg { width: 20px; height: 20px; display: inline-block; }
+        nav > button img { width: 20px; height: 20px; display: inline-block; }
         .badge { position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background-color: #ef4444; border-radius: 50%; border: 1px solid black; }
-        .badge-num { position: absolute; top: -8px; right: -8px; min-width: 18px; height: 18px; background-color: #ef4444; color: black; border-radius: 999px; border: 1px solid black; display: flex; align-items: center; justify-content: center; font-size: 10px; padding: 0 4px; font-weight: 700; }
+        .badge-num { position: absolute; top: 0; right: 0; transform: translate(40%, -40%); min-width: 18px; height: 18px; background-color: #ef4444; color: #000; border-radius: 999px; border: 1px solid rgba(0,0,0,0.6); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; padding: 0 5px; font-weight: 700; line-height: 1; box-shadow: 0 2px 6px rgba(0,0,0,0.35); }
 
         button:focus-visible{ outline: 3px solid rgba(201,164,58,0.18); outline-offset: 3px; }
         @media (prefers-reduced-motion: reduce){
@@ -71,6 +104,19 @@
         }
 
         .container{ max-width: var(--max-width); margin-left: auto; margin-right: auto; }
+        /* Cosmetic improvements */
+        .hero-heading { text-shadow: 0 6px 30px rgba(0,0,0,0.6); }
+        .cta-primary { background: linear-gradient(90deg,var(--gold),var(--gold-dim)); color: black; padding: 10px 20px; border-radius: 9999px; font-weight:800; box-shadow: 0 8px 30px rgba(201,164,58,0.12); transition: transform .14s ease, box-shadow .14s ease; }
+        .cta-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(201,164,58,0.16); }
+        .cta-secondary { border: 1px solid rgba(255,255,255,0.06); padding: 8px 14px; border-radius: 10px; color: #ddd; background: transparent; }
+        .plan-tile { border: 1px solid var(--muted); background: transparent; transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease; }
+        .plan-tile:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+        .plan-primary { border-color: var(--gold); background: rgba(201,164,58,0.06); }
+        .plan-badge { background: var(--gold); color: black; padding: 4px 8px; border-radius: 999px; font-weight:700; font-size:12px; }
+        @media (min-width: 900px){
+            .plan-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+            .max-w-4xl { max-width: 980px; }
+        }
         @media (max-width: 640px) {
             :root { --max-width: 100%; }
             body { padding-left: 12px; padding-right: 12px; }
@@ -88,8 +134,9 @@
 
     <script type="text/babel" data-type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, fetchSignInMethodsForEmail, onAuthStateChanged, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
         import { getFirestore, collection, addDoc, query, where, onSnapshot, deleteDoc, doc, updateDoc, setDoc, getDocs, getDoc, orderBy, limit, writeBatch, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getStorage, ref as storageRef, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
 
         const ADMIN_EMAIL = "support@blackbookcrm.org"; 
         const FIREBASE_EMAIL_URL = "https://us-central1-barbertemp-7640a.cloudfunctions.net/sendInvite";
@@ -110,6 +157,39 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
         const { useState, useEffect, useRef } = React;
+
+        // --- Image resize helper: returns a Blob resized to maxDimension while preserving aspect ratio
+        async function resizeImageFile(file, maxDimension = 1200, quality = 0.8) {
+            if (!file || !(file instanceof File)) return file;
+            try {
+                const img = await new Promise((res, rej) => {
+                    const i = new Image();
+                    i.onload = () => res(i);
+                    i.onerror = rej;
+                    i.src = URL.createObjectURL(file);
+                });
+                const canvas = document.createElement('canvas');
+                let { width, height } = img;
+                if (width <= maxDimension && height <= maxDimension) {
+                    URL.revokeObjectURL(img.src);
+                    return file;
+                }
+                const ratio = width / height;
+                if (ratio > 1) {
+                    width = maxDimension; height = Math.round(maxDimension / ratio);
+                } else {
+                    height = maxDimension; width = Math.round(maxDimension * ratio);
+                }
+                canvas.width = width; canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                const blob = await new Promise((res) => canvas.toBlob(res, 'image/jpeg', quality));
+                URL.revokeObjectURL(img.src);
+                return blob instanceof Blob ? new File([blob], file.name.replace(/\.[^.]+$/, '.jpg'), { type: 'image/jpeg' }) : file;
+            } catch (e) {
+                return file;
+            }
+        }
 
         // ICONS
         const Scissors = () => <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>;
@@ -310,6 +390,37 @@
                                     <span className="text-white font-bold uppercase">Help & Support</span>
                                 </div>
                             </div>
+                            <hr className="my-4 border-zinc-800" />
+                            <h3 className="text-white font-bold mb-3">License Keys</h3>
+                            <div className="bg-zinc-900 p-4 rounded-lg border border-zinc-800 mb-4">
+                                <div className="grid grid-cols-3 gap-2">
+                                    <input type="number" min="1" value={newLicense.count} onChange={e=>setNewLicense(s=>({...s, count: e.target.value}))} className="p-2 bg-black border border-zinc-800 rounded text-white" />
+                                    <input type="number" min="0" value={newLicense.durationDays} onChange={e=>setNewLicense(s=>({...s, durationDays: e.target.value}))} className="p-2 bg-black border border-zinc-800 rounded text-white" />
+                                    <div className="text-zinc-400 text-xs p-2">Count | Duration (days)</div>
+                                </div>
+                                <div className="mt-2 flex gap-2">
+                                    <button onClick={createLicenseKeys} className="px-4 py-2 bg-gold text-black rounded">Create License Keys</button>
+                                </div>
+                            </div>
+
+                            <div className="mb-4">
+                                <h4 className="text-white font-bold mb-2">Recent License Keys</h4>
+                                <div className="grid gap-2">
+                                    {licenseLoading && <div className="text-zinc-500">Loading...</div>}
+                                    {!licenseLoading && licenseKeys.length === 0 && <div className="text-zinc-500">No keys yet.</div>}
+                                    {licenseKeys.map(l => (
+                                        <div key={l.id} className="p-3 bg-zinc-900 border border-zinc-800 rounded flex justify-between items-center">
+                                            <div>
+                                                <div className="font-mono text-sm text-white">{l.code}</div>
+                                                <div className="text-xs text-zinc-400">{l.durationDays || 0}d • {l.active ? 'Active' : `Used by ${l.usedBy || '—'}`}</div>
+                                            </div>
+                                            <div className="flex gap-2">
+                                                <button onClick={async () => { try { await updateDoc(doc(db,'licenseKeys', l.id), { active: !l.active }); showToast('Toggled', 'success'); } catch(e){ showToast('Failed', 'error'); } }} className="px-2 py-1 bg-zinc-800 rounded text-zinc-300 text-xs">Toggle</button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                     
                     <div className="flex-1 overflow-y-auto p-4">
                         {view === 'list' && (
@@ -373,6 +484,7 @@
 
         // --- CHAT WINDOW ---
         function ChatWindow({ currentUser, chatPartnerUid, chatPartnerName, onClose }) {
+            const [chatPartnerPhoto, setChatPartnerPhoto] = useState(null);
             const [messages, setMessages] = useState([]);
             const [newMessage, setNewMessage] = useState("");
             const [isPartnerTyping, setIsPartnerTyping] = useState(false);
@@ -409,6 +521,15 @@
                 });
                 return () => unsub();
             }, [conversationId, chatPartnerUid]);
+
+            // load chat partner profile (photo)
+            useEffect(() => {
+                if (!chatPartnerUid) return;
+                try {
+                    const unsub = onSnapshot(doc(db, 'users', chatPartnerUid), (snap) => { if (snap.exists()) setChatPartnerPhoto(snap.data().photoURL || null); else setChatPartnerPhoto(null); });
+                    return () => unsub();
+                } catch (e) { setChatPartnerPhoto(null); }
+            }, [chatPartnerUid]);
 
             // outbox retry queue (attempt periodically)
             useEffect(() => {
@@ -474,7 +595,7 @@
 
             return (
                 <div className="absolute inset-0 bg-black z-50 flex flex-col fade-in">
-                    <div className="p-4 bg-zinc-900 border-b border-zinc-800 flex justify-between items-center"><div className="flex items-center gap-3"><button onClick={onClose} aria-label="Back" title="Back" className="text-zinc-400 p-2"><ChevronLeft /></button><span className="text-white font-bold brand-font text-lg">{chatPartnerName}</span></div><div className="text-xs text-zinc-500">{isPartnerTyping ? 'typing...' : ''}</div></div>
+                    <div className="p-4 bg-zinc-900 border-b border-zinc-800 flex justify-between items-center"><div className="flex items-center gap-3"><button onClick={onClose} aria-label="Back" title="Back" className="text-zinc-400 p-2"><ChevronLeft /></button>{chatPartnerPhoto ? (<img src={chatPartnerPhoto} alt={chatPartnerName} className="w-8 h-8 rounded-full object-cover" />) : (<div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-400 font-bold">{(chatPartnerName||'').charAt(0) || 'P'}</div>)}<span className="text-white font-bold brand-font text-lg">{chatPartnerName}</span></div><div className="text-xs text-zinc-500">{isPartnerTyping ? 'typing...' : ''}</div></div>
                     <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-black">
                         {messages.map((msg) => {
                             const isMe = msg.senderId === currentUser.uid;
@@ -525,8 +646,25 @@
             const [barberServices, setBarberServices] = useState([]);
             const [barberCoupons, setBarberCoupons] = useState([]);
             const [shopProducts, setShopProducts] = useState([]);
+            const [newProfileImageFile, setNewProfileImageFile] = useState(null);
+            const [newProfileImageUrl, setNewProfileImageUrl] = useState('');
+            const [newProfileUploading, setNewProfileUploading] = useState(false);
+            const [imageModalUrl, setImageModalUrl] = useState(null);
             const [orderItems, setOrderItems] = useState([]);
             const [ordering, setOrdering] = useState(false);
+            const [shopNameEdit, setShopNameEdit] = useState('');
+            const [pickupInstructionsEdit, setPickupInstructionsEdit] = useState('');
+            const [showAddProduct, setShowAddProduct] = useState(false);
+            const [showAddProductModal, setShowAddProductModal] = useState(false);
+            const [newProductName, setNewProductName] = useState('');
+            const [newProductPrice, setNewProductPrice] = useState('');
+            const [newProductDesc, setNewProductDesc] = useState('');
+            const [newProductFile, setNewProductFile] = useState(null);
+            const [newProductPreview, setNewProductPreview] = useState('');
+            const [uploadingProduct, setUploadingProduct] = useState(false);
+            const [lastPlacedOrder, setLastPlacedOrder] = useState(null);
+            const [showPickupModal, setShowPickupModal] = useState(false);
+            const [viewingOrder, setViewingOrder] = useState(null);
             const [appointments, setAppointments] = useState([]);
             const [selectedServices, setSelectedServices] = useState([]); // allow multiple services
             const [selectedDate, setSelectedDate] = useState("");
@@ -556,6 +694,8 @@
             const [notifSMS, setNotifSMS] = useState(false);
             const [notifPush, setNotifPush] = useState(true);
             const [reminderHours, setReminderHours] = useState(24);
+
+            const isBillingExpired = userProfile && userProfile.billingNextDue && (new Date() > new Date(userProfile.billingNextDue));
 
             useEffect(() => {
                 try {
@@ -613,9 +753,45 @@
                     };
                     // remove undefined keys
                     Object.keys(upd).forEach(k => { if (upd[k] === undefined) delete upd[k]; });
+
+                    // handle profile image upload
+                    if (newProfileImageFile) {
+                        try {
+                            setNewProfileUploading(true);
+                            const storage = getStorage();
+                            const fileToUpload = await resizeImageFile(newProfileImageFile, 800, 0.85);
+                            const key = `avatars/${user.uid}/${Date.now()}_${(fileToUpload.name || 'avatar').replace(/[^a-z0-9.\-]/gi, '_')}`;
+                            const sRef = storageRef(storage, key);
+                            const uploadTask = uploadBytesResumable(sRef, fileToUpload);
+                            await new Promise((res, rej) => { uploadTask.on('state_changed', null, rej, res); });
+                            const url = await getDownloadURL(sRef);
+                            upd.photoURL = url;
+                            upd.photoPath = key;
+                        } catch (upErr) {
+                            console.error('Profile image upload failed', upErr);
+                            showToast('Image upload failed', 'error');
+                        } finally { setNewProfileUploading(false); }
+                    }
+
                     await updateDoc(doc(db, 'users', user.uid), { ...upd, updatedAt: new Date().toISOString() });
+
+                    // if client is linked to a barber, update their clients record(s) so barber roster shows avatar
+                    try {
+                        if (userProfile && userProfile.linkedBarberId) {
+                            const q = query(collection(db, 'clients'), where('userId', '==', userProfile.linkedBarberId), where('email', '==', user.email));
+                            const snap = await getDocs(q);
+                            for (const d of snap.docs) {
+                                const data = {};
+                                if (upd.photoURL) data.photoURL = upd.photoURL;
+                                if (upd.photoPath) data.photoPath = upd.photoPath;
+                                if (Object.keys(data).length) await updateDoc(doc(db, 'clients', d.id), data);
+                            }
+                        }
+                    } catch(e) { console.warn('Failed to update clients collection with photo', e); }
+
                     showToast('Settings saved', 'success');
                     setShowUserSettings(false);
+                    setNewProfileImageFile(null); setNewProfileImageUrl('');
                 } catch (err) {
                     showToast(err.message || 'Failed saving', 'error');
                 }
@@ -677,6 +853,14 @@
                 });
                 return () => { try { unsub(); } catch(e){} try { unsubProducts && unsubProducts(); } catch(e) {} };
             }, [user]);
+
+            // initialize shop edit fields when barberProfile loads
+            useEffect(() => {
+                if (barberProfile) {
+                    setShopNameEdit(barberProfile.shopName || '');
+                    setPickupInstructionsEdit(barberProfile.pickupInstructions || '');
+                }
+            }, [barberProfile]);
 
             // GENERATE TIME SLOTS (exclude already-taken slots)
             useEffect(() => {
@@ -876,10 +1060,69 @@
 
             return (
                 <div className="min-h-screen w-full max-w-md mx-auto bg-black border-x border-zinc-800 relative shadow-2xl flex flex-col overflow-hidden">
+                    {isBillingExpired && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
+                            <div className="bg-zinc-900 border border-zinc-800 p-6 rounded-lg text-center max-w-lg mx-4">
+                                <h2 className="text-lg font-bold text-white mb-2">Subscription Required</h2>
+                                <p className="text-zinc-400 mb-4">Your monthly payment is overdue. You must make a payment to access the dashboard.</p>
+                                <div className="flex justify-center gap-3">
+                                    <button onClick={() => { window.location.href = '/#/plans'; }} className="px-4 py-2 bg-gold text-black font-bold rounded">Make Payment</button>
+                                    <button onClick={() => setShowSupport(true)} className="px-4 py-2 bg-zinc-800 text-white rounded">Contact Support</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                     <div className="shrink-0 p-6 pb-4 border-b border-zinc-900 bg-gradient-to-r from-zinc-900/80 to-zinc-950/60 z-20">
                         <div className="flex items-center justify-between gap-4 flex-wrap">
                             <div className="flex items-center gap-4">
-                                <div className="w-14 h-14 rounded-full bg-zinc-800 flex items-center justify-center text-white font-bold text-xl">{(userProfile && userProfile.firstName) ? userProfile.firstName.charAt(0) : 'U'}</div>
+                                {userProfile?.photoURL ? (
+                                    <img src={userProfile.photoURL} alt={userProfile.firstName || 'User'} onError={(e)=>{e.target.onerror=null; e.target.style.display='none';}} className="w-14 h-14 rounded-full object-cover" />
+                                ) : (
+                                    <div className="w-14 h-14 rounded-full bg-zinc-800 flex items-center justify-center text-white font-bold text-xl">{(userProfile && userProfile.firstName) ? userProfile.firstName.charAt(0) : 'U'}</div>
+                                )}
+
+                                {showPickupModal && lastPlacedOrder && (
+                                    <div className="fixed inset-0 z-60 flex items-center justify-center p-6">
+                                        <div className="absolute inset-0 bg-black/80" onClick={() => setShowPickupModal(false)} />
+                                        <div className="relative z-70 bg-zinc-950 w-full max-w-md rounded-xl border border-zinc-800 p-6 shadow-2xl">
+                                            <h3 className="text-white font-bold mb-2">Pickup Instructions</h3>
+                                            <div className="text-zinc-400 mb-4">{lastPlacedOrder.pickupInstructions || 'No pickup instructions provided.'}</div>
+                                            <div className="flex justify-end gap-2">
+                                                <button onClick={() => { setShowPickupModal(false); setViewingOrder(lastPlacedOrder); }} className="px-3 py-2 bg-gold text-black rounded">View Order</button>
+                                                <button onClick={() => setShowPickupModal(false)} className="px-3 py-2 bg-zinc-800 text-white rounded">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {viewingOrder && (
+                                    <div className="fixed inset-0 z-70 flex items-center justify-center p-6">
+                                        <div className="absolute inset-0 bg-black/80" onClick={() => setViewingOrder(null)} />
+                                        <div className="relative z-80 bg-zinc-950 w-full max-w-md rounded-xl border border-zinc-800 p-6 shadow-2xl">
+                                            <button onClick={() => setViewingOrder(null)} className="absolute top-3 right-3 z-80 bg-zinc-900 text-white p-2 rounded">Close</button>
+                                            <h3 className="text-white font-bold mb-2">Order Details</h3>
+                                            <div className="mb-3">
+                                                <div className="text-zinc-400 text-sm">Order ID</div>
+                                                <div className="text-white font-bold">{viewingOrder.id}</div>
+                                            </div>
+                                            <div className="mb-3">
+                                                <div className="text-zinc-400 text-sm">Items</div>
+                                                <div className="space-y-2">
+                                                    {viewingOrder.items && viewingOrder.items.map((it,i) => (
+                                                        <div key={i} className="flex justify-between items-center bg-black/20 p-2 rounded">
+                                                            <div className="text-white">{it.name} <span className="text-zinc-500 text-xs">x{it.qty}</span></div>
+                                                            <div className="text-gold">${(it.price * it.qty).toFixed(2)}</div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="text-zinc-400 text-sm">Pickup Instructions</div>
+                                                <div className="text-zinc-300">{viewingOrder.pickupInstructions || '—'}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                                 <div>
                                     <p className="text-xs text-zinc-400 uppercase">Welcome back</p>
                                     <h1 className="text-lg font-bold text-white brand-font">{userProfile?.firstName || user.email?.split('@')[0] || 'Guest'}</h1>
@@ -1036,13 +1279,82 @@
                         {activeTab === 'shop' && (
                             <div className="fade-in space-y-4">
                                 <h2 className="text-white brand-font text-lg mb-3">Shop</h2>
+                                {userProfile?.role === 'barber' && (
+                                    <div className="bg-zinc-900 p-3 rounded-xl border border-zinc-800 mb-3">
+                                        <h3 className="text-zinc-300 text-sm font-bold mb-2">Shop Settings</h3>
+                                        <div className="grid grid-cols-1 gap-2">
+                                            <input placeholder="Shop name" value={shopNameEdit} onChange={e => setShopNameEdit(e.target.value)} className="p-2 bg-black border border-zinc-800 rounded text-white" />
+                                            <textarea placeholder="Pickup instructions (shown to clients after purchase)" value={pickupInstructionsEdit} onChange={e => setPickupInstructionsEdit(e.target.value)} className="p-2 bg-black border border-zinc-800 rounded text-white" rows={3} />
+                                            <div className="flex gap-2">
+                                                <button onClick={async () => {
+                                                    try {
+                                                        await updateDoc(doc(db, 'users', user.uid), { shopName: shopNameEdit || '', pickupInstructions: pickupInstructionsEdit || '', updatedAt: new Date().toISOString() });
+                                                        showToast('Shop settings saved', 'success');
+                                                    } catch (e) { console.error(e); showToast('Failed saving shop settings', 'error'); }
+                                                }} className="px-3 py-2 bg-gold text-black rounded font-bold">Save</button>
+                                                <button onClick={() => setShowAddProductModal(true)} className="px-3 py-2 bg-zinc-800 text-white rounded">Add Product</button>
+                                                <button onClick={() => setShowCreateCouponModal(true)} className="px-3 py-2 bg-zinc-800 text-white rounded">Create Coupon</button>
+                                            </div>
+
+                                            {showAddProductModal && (
+                                                <div className="fixed inset-0 z-70 flex items-center justify-center p-6">
+                                                    <div className="absolute inset-0 bg-black/80" onClick={() => { setShowAddProductModal(false); setEditingProductId(null); }} />
+                                                    <div className="relative z-80 bg-zinc-950 w-full max-w-lg rounded-xl border border-zinc-800 p-6 shadow-2xl">
+                                                        <button onClick={() => { setShowAddProductModal(false); setEditingProductId(null); }} className="absolute top-3 right-3 z-80 bg-zinc-900 text-white p-2 rounded">Close</button>
+                                                        <h3 className="text-white font-bold mb-3">{editingProductId ? 'Edit Product' : 'Add Product'}</h3>
+                                                        <div className="space-y-3 mb-4">
+                                                            <input placeholder="Product name" value={newProductName} onChange={e => setNewProductName(e.target.value)} className="p-2 bg-black border border-zinc-800 rounded text-white w-full" />
+                                                            <input placeholder="Price" value={newProductPrice} onChange={e => setNewProductPrice(e.target.value)} className="p-2 bg-black border border-zinc-800 rounded text-white w-full" />
+                                                            <textarea placeholder="Description" value={newProductDesc} onChange={e => setNewProductDesc(e.target.value)} className="p-2 bg-black border border-zinc-800 rounded text-white w-full" rows={3} />
+                                                            <div className="mt-2">
+                                                                <label className="text-xs text-zinc-400 mb-1 block">Product Image (optional)</label>
+                                                                <div className="flex items-center gap-3">
+                                                                    <input type="file" accept="image/*" onChange={(e) => { const f = e.target.files && e.target.files[0]; setNewProductImageFile(f || null); if (f) setNewProductImageUrl(URL.createObjectURL(f)); }} className="bg-black text-white text-sm" />
+                                                                    {newProductImageUrl ? (<img src={newProductImageUrl} alt="preview" className="w-16 h-16 object-cover rounded" />) : null}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex gap-2">
+                                                            <button onClick={async () => { await addProduct(); setShowAddProductModal(false); }} disabled={newProductUploading} className="flex-1 bg-gold text-black font-bold py-3 rounded text-xs uppercase shadow-lg hover:bg-white transition-colors">{newProductUploading ? 'Uploading...' : (editingProductId ? 'Save Product' : 'Add Product')}</button>
+                                                            <button onClick={() => { setShowAddProductModal(false); setEditingProductId(null); setNewProductName(''); setNewProductPrice(''); setNewProductStock(''); setNewProductDesc(''); setNewProductImageUrl(''); setNewProductImageFile(null); }} className="px-3 py-3 bg-zinc-800 text-white rounded text-xs uppercase">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                            {/* Create Coupon Modal (also available from Shop) */}
+                                            {showCreateCouponModal && (
+                                                <div className="fixed inset-0 z-70 flex items-center justify-center p-6">
+                                                    <div className="absolute inset-0 bg-black/80" onClick={() => setShowCreateCouponModal(false)} />
+                                                    <div className="relative z-80 bg-zinc-950 w-full max-w-md rounded-xl border border-zinc-800 p-6 shadow-2xl">
+                                                        <button onClick={() => setShowCreateCouponModal(false)} className="absolute top-3 right-3 z-80 bg-zinc-900 text-white p-2 rounded">Close</button>
+                                                        <h3 className="text-white font-bold mb-3">Create Coupon</h3>
+                                                        <div className="space-y-3 mb-4">
+                                                            <input type="text" value={newCouponCode} onChange={(e) => setNewCouponCode(e.target.value)} placeholder="Code (e.g. SAVE10)" className="w-full bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none uppercase focus:border-gold" />
+                                                            <div className="flex gap-2">
+                                                                <select value={newCouponType} onChange={(e) => setNewCouponType(e.target.value)} className="w-1/3 bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold"><option value="fixed">$ Fixed</option><option value="percent">% Percent</option></select>
+                                                                <input type="number" value={newCouponValue} onChange={(e) => setNewCouponValue(e.target.value)} placeholder="Value" className="w-2/3 bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex gap-2">
+                                                            <button onClick={async () => { await addCoupon(); setShowCreateCouponModal(false); }} className="flex-1 bg-gold text-black font-bold py-3 rounded text-xs uppercase">Add Coupon</button>
+                                                            <button onClick={() => setShowCreateCouponModal(false)} className="px-3 py-3 bg-zinc-800 text-white rounded text-xs uppercase">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
                                 {shopProducts.length === 0 && <div className="text-zinc-500 text-sm">No products available.</div>}
                                 <div className="space-y-3">
                                     {shopProducts.map(prod => (
                                         <div key={prod.id} className="bg-zinc-900 p-3 rounded-lg border border-zinc-800 flex items-center justify-between gap-4">
-                                            <div>
-                                                <div className="text-white font-bold">{prod.name}</div>
-                                                <div className="text-zinc-400 text-xs">{prod.description || ''}</div>
+                                            <div className="flex items-center gap-3">
+                                                {prod.imageUrl ? (<img onClick={() => setImageModalUrl(prod.imageUrl)} src={prod.imageUrl} alt={prod.name} className="w-16 h-16 object-cover rounded cursor-pointer" />) : (<div className="w-16 h-16 bg-zinc-800 rounded flex items-center justify-center text-zinc-500">No Image</div>)}
+                                                <div>
+                                                    <div className="text-white font-bold">{prod.name}</div>
+                                                    <div className="text-zinc-400 text-xs">{prod.description || ''}</div>
+                                                </div>
                                             </div>
                                             <div className="text-right">
                                                 <div className="text-gold font-mono">${(prod.price || 0).toFixed ? (prod.price).toFixed(2) : (prod.price || 0)}</div>
@@ -1086,14 +1398,17 @@
                                     )}
                                     <div className="mt-3 flex gap-2">
                                         <button onClick={async () => {
-                                            if(orderItems.length === 0) { showToast('Add items first', 'error'); return; }
+                                            if (orderItems.length === 0) { showToast('Add items first', 'error'); return; }
                                             setOrdering(true);
                                             try {
                                                 const total = orderItems.reduce((s,i)=>s+(i.price*i.qty),0);
-                                                await addDoc(collection(db, 'pickupOrders'), { clientId: user.uid, barberId: user.linkedBarberId, items: orderItems.map(i=>({ productId: i.productId, name: i.name, price: i.price, qty: i.qty })), total, status: 'pickup_requested', createdAt: new Date().toISOString() });
+                                                const orderData = { clientId: user.uid, barberId: user.linkedBarberId, items: orderItems.map(i=>({ productId: i.productId, name: i.name, price: i.price, qty: i.qty })), total, status: 'pickup_requested', pickupInstructions: barberProfile?.pickupInstructions || '', createdAt: new Date().toISOString() };
+                                                const docRef = await addDoc(collection(db, 'pickupOrders'), orderData);
+                                                setLastPlacedOrder({ id: docRef.id, ...orderData });
+                                                setShowPickupModal(true);
                                                 showToast('Order placed for pickup', 'success');
                                                 setOrderItems([]);
-                                            } catch(e) { showToast('Failed to place order', 'error'); }
+                                            } catch(e) { console.error(e); showToast('Failed to place order', 'error'); }
                                             setOrdering(false);
                                         }} className="flex-1 bg-gold text-black py-3 rounded font-bold">Place Order (No Prepay)</button>
                                         <button onClick={() => setOrderItems([])} className="px-4 py-3 bg-zinc-800 text-white rounded">Clear</button>
@@ -1101,6 +1416,16 @@
                                 </div>
                             </div>
                         )}
+
+                                {imageModalUrl && (
+                                    <div className="fixed inset-0 z-60 flex items-center justify-center p-6">
+                                        <div className="absolute inset-0 bg-black/80" onClick={() => setImageModalUrl(null)} />
+                                        <div className="relative z-70 max-w-[90vw] max-h-[90vh] flex items-center justify-center">
+                                            <button onClick={() => setImageModalUrl(null)} className="absolute top-3 right-3 z-80 bg-zinc-900 text-white p-2 rounded">Close</button>
+                                            <img src={imageModalUrl} alt="Product" className="max-w-full max-h-[80vh] rounded shadow-2xl" />
+                                        </div>
+                                    </div>
+                                )}
 
                         {activeTab === 'history' && (
                             <div className="fade-in space-y-6">
@@ -1221,6 +1546,39 @@
                                         <input placeholder="First name" value={editFirstName} onChange={e=>setEditFirstName(e.target.value)} className="p-3 bg-black border border-zinc-800 rounded text-white" />
                                         <input placeholder="Last name" value={editLastName} onChange={e=>setEditLastName(e.target.value)} className="p-3 bg-black border border-zinc-800 rounded text-white" />
                                     </div>
+                                    <div className="mt-2 flex items-center gap-3">
+                                        <div className="text-xs text-zinc-400 mr-2">Profile Photo</div>
+                                        {/* file input removed from settings - upload available under Shop tab */}
+                                        {newProfileImageUrl || userProfile.photoURL ? (
+                                            <div className="flex items-center gap-2">
+                                                <img src={newProfileImageUrl || userProfile.photoURL} alt="profile" className="w-12 h-12 object-cover rounded-full" />
+                                                <div className="flex flex-col gap-1">
+                                                    <button type="button" onClick={() => { setNewProfileImageFile(null); setNewProfileImageUrl(''); }} className="px-2 py-1 bg-zinc-800 text-white rounded text-xs">Clear</button>
+                                                    <button type="button" onClick={async () => {
+                                                        if (!userProfile?.photoPath) { setNewProfileImageFile(null); setNewProfileImageUrl(''); return; }
+                                                        if (!await showConfirm({ message: 'Remove profile photo?' })) return;
+                                                        try {
+                                                            const storage = getStorage();
+                                                            await deleteObject(storageRef(storage, userProfile.photoPath));
+                                                        } catch (e) { console.warn('Failed deleting avatar from storage', e); }
+                                                        try { await updateDoc(doc(db, 'users', user.uid), { photoURL: '', photoPath: '', updatedAt: new Date().toISOString() }); } catch(e){}
+                                                        try {
+                                                            // update clients records for barber (if any)
+                                                            if (userProfile && userProfile.linkedBarberId) {
+                                                                const q = query(collection(db, 'clients'), where('userId', '==', userProfile.linkedBarberId), where('email', '==', user.email));
+                                                                const snap = await getDocs(q);
+                                                                for (const d of snap.docs) await updateDoc(doc(db, 'clients', d.id), { photoURL: '', photoPath: '' });
+                                                            }
+                                                        } catch(e){ console.warn('Failed clearing client records', e); }
+                                                        setNewProfileImageFile(null); setNewProfileImageUrl('');
+                                                        showToast('Profile photo removed', 'success');
+                                                    }} className="px-2 py-1 bg-red-900 text-white rounded text-xs">Remove Photo</button>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div className="w-12 h-12 bg-zinc-800 rounded-full flex items-center justify-center text-zinc-500">No</div>
+                                        )}
+                                    </div>
                                     <input placeholder="Phone" value={editPhone} onChange={e=>setEditPhone(e.target.value)} className="w-full p-3 bg-black border border-zinc-800 rounded text-white" />
                                     {/* preferred stylist removed per user request */}
                                     <div className="flex items-center gap-3">
@@ -1302,8 +1660,8 @@
         }
 
         // --- LOGIN SCREEN (With Home Button) ---
-        function LoginScreen({ onBack, initialMode }) {
-            const [isLogin, setIsLogin] = useState(true); const [isReset, setIsReset] = useState(false); const [signupStep, setSignupStep] = useState(1); const [selectedPlan, setSelectedPlan] = useState('free');
+        function LoginScreen({ onBack, initialMode, startRegister = false }) {
+            const [isLogin, setIsLogin] = useState(!startRegister); const [isReset, setIsReset] = useState(false); const [signupStep, setSignupStep] = useState(1); const [selectedPlan, setSelectedPlan] = useState('free');
             const [email, setEmail] = useState(""); const [password, setPassword] = useState(""); const [firstName, setFirstName] = useState(""); const [phone, setPhone] = useState(""); const [referralCode, setReferralCode] = useState("");
             const [error, setError] = useState(""); const [message, setMessage] = useState(""); const [loading, setLoading] = useState(false);
             const [passwordVisible, setPasswordVisible] = useState(false);
@@ -1360,6 +1718,14 @@
                         if (!isClientMode && signupStep === 1) {
                             // validate basic fields before moving to plan step
                             if (!firstName || !phone) { setError("All fields required."); return; }
+                            // check if email already exists in Firebase Auth; if so, block progression
+                            try {
+                                const methods = await fetchSignInMethodsForEmail(auth, email);
+                                if (methods && methods.length) { setError('Email already in use. Please log in or use a different email.'); return; }
+                            } catch (chkErr) {
+                                console.warn('Email existence check failed', chkErr);
+                                // allow progression on error but surface a warning
+                            }
                             const signupData = { firstName, phone, email, password, businessName: '', referralCode };
                             try { history.pushState({ signupData }, '', '#/plans'); window.dispatchEvent(new Event('hashchange')); } catch(e) { window.location.hash = '#/plans'; }
                             return;
@@ -1497,6 +1863,8 @@
             
             // Edit Modal
             const [editingUser, setEditingUser] = useState(null);
+            const [editBillingDays, setEditBillingDays] = useState(30);
+            const [editBillingMode, setEditBillingMode] = useState('extend'); // extend | set
             
             // Support Modal
             const [activeTicket, setActiveTicket] = useState(null);
@@ -1508,6 +1876,11 @@
             const [showRolesPanel, setShowRolesPanel] = useState(false);
             const [showAnalytics, setShowAnalytics] = useState(false);
             const [showAuditExport, setShowAuditExport] = useState(false);
+            // Discounts management state
+            const [discounts, setDiscounts] = useState([]);
+            const [discountsLoading, setDiscountsLoading] = useState(true);
+            const [newDiscount, setNewDiscount] = useState({ code: '', type: 'free', value: 0, planId: '' });
+            // (license keys removed per admin request)
             // Additional analytics state
             const [bookingsCount30, setBookingsCount30] = useState(0);
             const [monthlyRevenue, setMonthlyRevenue] = useState(0);
@@ -1538,6 +1911,21 @@
                     } catch(e) { console.error(e); setError("Admin Access Denied."); setLoading(false); }
                 };
                 fetchData();
+                // subscribe to discount codes collection
+                try {
+                    const q = query(collection(db, 'discountCodes'), orderBy('createdAt', 'desc'));
+                    const unsubDiscounts = onSnapshot(q, (snap) => {
+                        setDiscounts(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+                        setDiscountsLoading(false);
+                    }, (e) => { console.error('discounts snapshot', e); setDiscountsLoading(false); });
+                    // subscribe to license keys collection for admin view
+                    try {
+                        const qL = query(collection(db, 'licenseKeys'), orderBy('createdAt', 'desc'));
+                        const unsubLic = onSnapshot(qL, (snap) => { setLicenseKeys(snap.docs.map(d => ({ id: d.id, ...d.data() }))); setLicenseLoading(false); }, (e) => { console.error('licenseKeys snapshot', e); setLicenseLoading(false); });
+                        // ensure unsubscribe on cleanup
+                        return () => { try { unsubDiscounts(); } catch(e){} try { unsubLic(); } catch(e){} };
+                    } catch(e) { console.warn('Failed to subscribe licenseKeys', e); return () => { try { unsubDiscounts(); } catch(e){} }; }
+                } catch(e) { console.warn('Failed to subscribe discounts', e); }
             }, []);
 
             const fetchAdminLogs = async () => {
@@ -1556,6 +1944,45 @@
                 const csv = rows.map(r => r.map(c => '"' + String(c || '').replace(/"/g,'""') + '"').join(',')).join('\n');
                 const blob = new Blob([csv], { type: 'text/csv' });
                 const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `admin_logs_${Date.now()}.csv`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+            };
+
+            // Admin helpers: user billing adjustments
+
+            const grantDurationToUser = async (userId, days = 30, mode = 'extend') => {
+                if (!userId) { showToast('No user selected', 'error'); return; }
+                try {
+                    const userRef = doc(db, 'users', userId);
+                    const snap = await getDoc(userRef);
+                    const now = new Date();
+                    let newDue;
+                    const dms = (parseInt(days) || 0) * 24 * 60 * 60 * 1000;
+                    if (mode === 'extend' && snap.exists() && snap.data().billingNextDue) {
+                        const cur = new Date(snap.data().billingNextDue);
+                        newDue = new Date(Math.max(cur.getTime(), now.getTime()) + dms);
+                    } else {
+                        newDue = new Date(now.getTime() + dms);
+                    }
+                    await updateDoc(userRef, { billingNextDue: newDue.toISOString(), billingUpdatedAt: new Date().toISOString() });
+                    showToast('Billing updated', 'success');
+                } catch (e) { console.error(e); showToast('Failed updating billing', 'error'); }
+            };
+
+            const formatTimeLeft = (iso) => {
+                if (!iso) return '—';
+                try {
+                    const due = new Date(iso);
+                    const now = new Date();
+                    const diff = due - now;
+                    if (diff <= 0) return 'Due';
+                    const days = Math.floor(diff / (24*60*60*1000));
+                    const hours = Math.floor((diff % (24*60*60*1000)) / (60*60*1000));
+                    const mins = Math.floor((diff % (60*60*1000)) / (60*1000));
+                    const parts = [];
+                    if (days > 0) parts.push(`${days}d`);
+                    if (hours > 0) parts.push(`${hours}h`);
+                    parts.push(`${mins}m`);
+                    return parts.join(' ');
+                } catch (e) { return '—'; }
             };
 
             // Fetch bookings/payments and compute analytics where possible
@@ -1656,6 +2083,29 @@
                 // Optimistic update locally not needed as snapshot handles it
             };
 
+            // --- Discounts management actions ---
+            const createDiscount = async () => {
+                const code = (newDiscount.code || '').toUpperCase().trim();
+                if (!code) { showToast('Enter a code', 'error'); return; }
+                try {
+                    await addDoc(collection(db, 'discountCodes'), { code, type: newDiscount.type || 'free', value: Number(newDiscount.value) || 0, planId: newDiscount.planId || '', active: true, createdAt: new Date().toISOString() });
+                    setNewDiscount({ code: '', type: 'free', value: 0, planId: '' });
+                    showToast('Discount created', 'success');
+                } catch (e) { console.error(e); showToast('Create failed', 'error'); }
+            };
+
+            const toggleDiscountActive = async (id, current) => {
+                try { await updateDoc(doc(db, 'discountCodes', id), { active: !current }); showToast('Updated', 'success'); }
+                catch(e){ console.error(e); showToast('Update failed', 'error'); }
+            };
+
+            const deleteDiscount = async (id) => {
+                if (!id) return;
+                if (!(await showConfirm({ title: 'Delete Code', message: 'Delete this discount code?' }))) return;
+                try { await deleteDoc(doc(db, 'discountCodes', id)); showToast('Deleted', 'success'); }
+                catch(e){ console.error(e); showToast('Delete failed', 'error'); }
+            };
+
             if (selectedUser) return (<div className="relative h-full w-full"><div className="absolute top-0 left-0 w-full bg-red-900 text-white text-[10px] text-center p-2 z-50 font-bold uppercase flex justify-between px-4 items-center"><span>Ghost Mode: {selectedUser.email}</span><button onClick={() => setSelectedUser(null)} className="underline text-white bg-black/50 px-2 py-1 rounded">EXIT</button></div><Dashboard user={{uid: selectedUser.id}} isGhost={true} /></div>);
             if (error) return <div className="h-screen bg-black flex items-center justify-center text-red-500 p-6 text-center">{error}</div>;
 
@@ -1696,6 +2146,7 @@
                             <button onClick={() => setView('barbers')} className={`flex-1 py-2 rounded text-xs font-bold uppercase ${view === 'barbers' ? 'bg-gold text-black' : 'bg-zinc-900 text-zinc-500'}`}>Barbers</button>
                             <button onClick={() => setView('clients')} className={`flex-1 py-2 rounded text-xs font-bold uppercase ${view === 'clients' ? 'bg-gold text-black' : 'bg-zinc-900 text-zinc-500'}`}>Clients</button>
                             <button onClick={() => setView('support')} className={`flex-1 py-2 rounded text-xs font-bold uppercase ${view === 'support' ? 'bg-gold text-black' : 'bg-zinc-900 text-zinc-500'}`}>Support ({openTicketsCount})</button>
+                            <button onClick={() => setView('discounts')} className={`flex-1 py-2 rounded text-xs font-bold uppercase ${view === 'discounts' ? 'bg-gold text-black' : 'bg-zinc-900 text-zinc-500'}`}>Discounts</button>
                         </div>
                     </div>
 
@@ -1708,7 +2159,11 @@
                                     <div key={u.id} className="bg-zinc-900 p-4 rounded-lg border border-zinc-800 flex flex-col justify-between transform transition-transform hover:-translate-y-1 hover:shadow-lg">
                                         <div>
                                             <div className="flex items-center gap-3">
-                                                <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-white font-bold text-lg">{u.firstName ? u.firstName.charAt(0) : 'U'}</div>
+                                                {u.photoURL ? (
+                                                    <img src={u.photoURL} alt={u.firstName || 'User'} onError={(e)=>{e.target.onerror=null; e.target.style.display='none';}} className="w-12 h-12 rounded-full object-cover" />
+                                                ) : (
+                                                    <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-white font-bold text-lg">{u.firstName ? u.firstName.charAt(0) : 'U'}</div>
+                                                )}
                                                 <div>
                                                     <h3 className="text-white font-bold">{u.firstName || "No Name"}</h3>
                                                     <p className="text-xs text-zinc-500">{u.email}</p>
@@ -1717,6 +2172,7 @@
                                             <div className="flex gap-2 mt-3">
                                                 <span className="text-[9px] bg-zinc-800 px-2 py-0.5 rounded text-gold uppercase">{u.plan || "Free"}</span>
                                                 {u.role === 'barber' && <span className="text-[9px] bg-zinc-800 px-2 py-0.5 rounded text-zinc-400">Credits: {u.credits || 0}</span>}
+                                                <div className="ml-2 text-[11px] text-zinc-400">Next charge: <span className="text-white font-mono">{formatTimeLeft(u.billingNextDue)}</span></div>
                                             </div>
                                         </div>
                                         <div className="mt-4 flex items-center justify-end gap-2">
@@ -1727,6 +2183,47 @@
                                 ))}
                             </div>
                         </>
+                    )}
+
+                    {view === 'discounts' && (
+                        <div className="p-4">
+                            <h3 className="text-white font-bold mb-3">Discount Codes</h3>
+                            <div className="bg-zinc-900 p-4 rounded-lg border border-zinc-800 mb-4">
+                                <div className="grid grid-cols-3 gap-2">
+                                    <input placeholder="Code (e.g. FREEPRO)" value={newDiscount.code} onChange={e=>setNewDiscount(s=>({...s, code: e.target.value}))} className="p-2 bg-black border border-zinc-800 rounded text-white" />
+                                    <select value={newDiscount.type} onChange={e=>setNewDiscount(s=>({...s, type: e.target.value}))} className="p-2 bg-black border border-zinc-800 rounded text-white">
+                                        <option value="free">Free</option>
+                                        <option value="fixed">Fixed ($)</option>
+                                        <option value="percent">Percent (%)</option>
+                                    </select>
+                                    <input placeholder="Value (0)" value={newDiscount.value} onChange={e=>setNewDiscount(s=>({...s, value: e.target.value}))} className="p-2 bg-black border border-zinc-800 rounded text-white" />
+                                </div>
+                                <div className="mt-2 grid grid-cols-2 gap-2">
+                                    <input placeholder="Plan ID (optional)" value={newDiscount.planId} onChange={e=>setNewDiscount(s=>({...s, planId: e.target.value}))} className="p-2 bg-black border border-zinc-800 rounded text-white" />
+                                    <div className="flex gap-2">
+                                        <button onClick={createDiscount} className="px-4 py-2 bg-gold text-black rounded">Create</button>
+                                        <button onClick={() => setNewDiscount({ code: '', type: 'free', value: 0, planId: '' })} className="px-4 py-2 bg-zinc-800 text-white rounded">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="space-y-3">
+                                {discountsLoading && <div className="text-zinc-500">Loading codes...</div>}
+                                {(!discountsLoading && discounts.length === 0) && <div className="text-zinc-500">No discount codes found.</div>}
+                                {discounts.map(d => (
+                                    <div key={d.id} className="bg-zinc-900 p-3 rounded border border-zinc-800 flex items-center justify-between">
+                                        <div>
+                                            <div className="font-bold text-white">{d.code} {d.planId ? <span className="text-xs text-zinc-400 ml-2">({d.planId})</span> : null}</div>
+                                            <div className="text-xs text-zinc-400">Type: {d.type} {d.type === 'fixed' ? `- $${d.value}` : d.type === 'percent' ? `- ${d.value}%` : ''} • Created: {d.createdAt ? new Date(d.createdAt).toLocaleString() : ''}</div>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <button onClick={() => toggleDiscountActive(d.id, d.active)} className={`px-3 py-1 rounded ${d.active ? 'bg-green-600 text-black' : 'bg-zinc-800 text-white'}`}>{d.active ? 'Active' : 'Inactive'}</button>
+                                            <button onClick={() => deleteDiscount(d.id)} className="px-3 py-1 rounded bg-red-700 text-white">Delete</button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     )}
 
                     {/* Admin modals and panels */}
@@ -1900,6 +2397,26 @@
                                     <div><label className="text-[10px] text-zinc-500 uppercase font-bold">Phone</label><input value={editingUser.phone || ''} onChange={(e) => setEditingUser({...editingUser, phone: e.target.value})} className="w-full bg-black border border-zinc-800 p-3 rounded text-white text-sm"/></div>
                                     
                                     <div className="border-t border-zinc-800 pt-4 mt-4">
+                                        <p className="text-[10px] text-zinc-500 uppercase font-bold mb-2">Billing / Licenses</p>
+                                        <div className="grid grid-cols-2 gap-2">
+                                            <div className="text-xs text-zinc-400">Current due: <span className="text-white font-mono">{editingUser.billingNextDue ? new Date(editingUser.billingNextDue).toLocaleString() : '—'}</span></div>
+                                            <div className="text-xs text-zinc-400">Time left: <span className="text-white font-mono">{formatTimeLeft(editingUser.billingNextDue)}</span></div>
+                                        </div>
+                                        <div className="grid grid-cols-3 gap-2 mt-2">
+                                            <input type="number" min="0" value={editBillingDays} onChange={e=>setEditBillingDays(e.target.value)} className="p-2 bg-black border border-zinc-800 rounded text-white" />
+                                            <select value={editBillingMode} onChange={e=>setEditBillingMode(e.target.value)} className="p-2 bg-black border border-zinc-800 rounded text-white">
+                                                <option value="extend">Extend</option>
+                                                <option value="set">Set from now</option>
+                                            </select>
+                                            <div className="flex items-center text-xs text-zinc-400 px-2">days</div>
+                                        </div>
+                                        <div className="flex gap-2 mt-2">
+                                            <button type="button" onClick={async () => { await grantDurationToUser(editingUser.id, editBillingDays, editBillingMode); const snap = await getDoc(doc(db,'users', editingUser.id)); if (snap.exists()) setEditingUser({ id: snap.id, ...snap.data() }); }} className="px-4 py-2 bg-gold text-black rounded">Apply</button>
+                                            <input placeholder="License code" value={licenseCodeInput} onChange={e=>setLicenseCodeInput(e.target.value)} className="p-2 bg-black border border-zinc-800 rounded text-white flex-1" />
+                                            <button type="button" onClick={async () => { await applyLicenseToUser(licenseCodeInput, editingUser.id); const snap = await getDoc(doc(db,'users', editingUser.id)); if (snap.exists()) setEditingUser({ id: snap.id, ...snap.data() }); setLicenseCodeInput(''); }} className="px-4 py-2 bg-zinc-800 text-white rounded">Apply Code</button>
+                                        </div>
+                                    </div>
+                                    <div className="border-t border-zinc-800 pt-4 mt-4">
                                         <p className="text-[10px] text-zinc-500 uppercase font-bold mb-2">Danger Zone</p>
                                         <div className="flex gap-2">
                                             <button type="button" onClick={() => handleResetPassword(editingUser.email)} className="flex-1 py-2 bg-zinc-900 border border-zinc-700 text-zinc-300 text-xs font-bold uppercase rounded">Reset Password</button>
@@ -1960,13 +2477,19 @@
             const [newCouponCode, setNewCouponCode] = useState("");
             const [newCouponType, setNewCouponType] = useState("fixed"); 
             const [newCouponValue, setNewCouponValue] = useState("");
+            const [showAddServiceModal, setShowAddServiceModal] = useState(false);
+            const [showCreateCouponModal, setShowCreateCouponModal] = useState(false);
 
             // Products management
             const [newProductName, setNewProductName] = useState("");
             const [newProductPrice, setNewProductPrice] = useState("");
             const [newProductStock, setNewProductStock] = useState("");
             const [newProductDesc, setNewProductDesc] = useState("");
+                const [newProductImageFile, setNewProductImageFile] = useState(null);
+                const [newProductImageUrl, setNewProductImageUrl] = useState('');
+                const [newProductUploading, setNewProductUploading] = useState(false);
             const [editingProductId, setEditingProductId] = useState(null);
+                const [showAddProductModalAdmin, setShowAddProductModalAdmin] = useState(false);
 
             const [promoText, setPromoText] = useState("Yo {name}, got a spot open. Want it?");
             const [promoSubject, setPromoSubject] = useState("");
@@ -2058,12 +2581,46 @@
                 if(!newProductName || !newProductPrice) return;
                 const payload = { userId: user.uid, name: newProductName, price: parseFloat(newProductPrice), stock: newProductStock ? parseInt(newProductStock) : null, description: newProductDesc || '', createdAt: new Date().toISOString() };
                 try {
+                    // If an image file is present, upload to Firebase Storage first
+                    if (newProductImageFile) {
+                        try {
+                            setNewProductUploading(true);
+                            const storage = getStorage();
+                            const fileToUpload = await resizeImageFile(newProductImageFile, 1200, 0.8);
+                            const key = `products/${user.uid}/${Date.now()}_${(fileToUpload.name || 'img').replace(/[^a-z0-9.\-]/gi, '_')}`;
+                            const sRef = storageRef(storage, key);
+                            const uploadTask = uploadBytesResumable(sRef, fileToUpload);
+                            await new Promise((res, rej) => { uploadTask.on('state_changed', null, rej, res); });
+                            const url = await getDownloadURL(sRef);
+                            payload.imageUrl = url;
+                            payload.imagePath = key;
+                        } catch (upErr) {
+                            console.error('Image upload failed', upErr);
+                            showToast('Image upload failed', 'error');
+                        } finally { setNewProductUploading(false); }
+                    }
+
                     if (editingProductId) { await updateDoc(doc(db, 'products', editingProductId), payload); setEditingProductId(null); showToast('Product updated', 'success'); }
                     else { await addDoc(collection(db, 'products'), payload); showToast('Product added', 'success'); }
-                    setNewProductName(''); setNewProductPrice(''); setNewProductStock(''); setNewProductDesc('');
+                    setNewProductName(''); setNewProductPrice(''); setNewProductStock(''); setNewProductDesc(''); setNewProductImageFile(null); setNewProductImageUrl('');
                 } catch(e) { showToast('Failed saving product', 'error'); }
             };
-            const deleteProduct = async (id) => { if (await showConfirm({ message: 'Delete product?' })) await deleteDoc(doc(db, 'products', id)); };
+            const deleteProduct = async (id) => {
+                if (!await showConfirm({ message: 'Delete product?' })) return;
+                try {
+                    const pSnap = await getDoc(doc(db, 'products', id));
+                    if (pSnap.exists()) {
+                        const pdata = pSnap.data();
+                        if (pdata && pdata.imagePath) {
+                            try {
+                                const storage = getStorage();
+                                await deleteObject(storageRef(storage, pdata.imagePath));
+                            } catch (e) { console.warn('Failed deleting product image', e); }
+                        }
+                    }
+                    await deleteDoc(doc(db, 'products', id));
+                } catch (err) { showToast('Failed deleting product', 'error'); }
+            };
             const handleEmail = async (client) => {
                 if(userProfile.plan === 'free_trial') { showToast("Upgrade required.", 'error'); return; }
                 if(!client.email) return;
@@ -2207,11 +2764,33 @@
             const today = getTodayPSTString();
             // moneyToday should reflect the currently selected view date so the Money tab matches the list
             const moneyToday = appointments.filter(a => a.status === 'completed' && a.date === viewDate).reduce((sum, a) => sum + (parseFloat(a.price) || 0), 0);
-            const nowPST_local = getNowPST();
-            const weekStart = new Date(nowPST_local); weekStart.setDate(nowPST_local.getDate() - nowPST_local.getDay());
-            const monthStart = new Date(nowPST_local); monthStart.setDate(1);
-            const moneyWeek = appointments.filter(a => a.status === 'completed' && parseDatePST(a.date) >= weekStart).reduce((sum, a) => sum + (a.price || 0), 0);
-            const moneyMonth = appointments.filter(a => a.status === 'completed' && parseDatePST(a.date) >= monthStart).reduce((sum, a) => sum + (a.price || 0), 0);
+            // Use the selected view date as the reference for week/month calculations so the Money tab matches the view
+            const refDate = parseDatePST(viewDate) || getNowPST();
+            const weekStart = new Date(refDate); weekStart.setDate(refDate.getDate() - refDate.getDay()); weekStart.setHours(0,0,0,0);
+            const monthStart = new Date(refDate); monthStart.setDate(1); monthStart.setHours(0,0,0,0);
+            const moneyWeek = appointments.filter(a => a.status === 'completed' && parseDatePST(a.date) >= weekStart).reduce((sum, a) => sum + (parseFloat(a.price) || 0), 0);
+            const moneyMonth = appointments.filter(a => a.status === 'completed' && parseDatePST(a.date) >= monthStart).reduce((sum, a) => sum + (parseFloat(a.price) || 0), 0);
+
+            // Additional analytics
+            const pendingMoney = appointments.filter(a => a.status === 'booked').reduce((s,a) => s + (parseFloat(a.price) || 0), 0);
+            const allCompleted = appointments.filter(a => a.status === 'completed');
+            const completedTotalAll = allCompleted.reduce((s,a) => s + (parseFloat(a.price) || 0), 0);
+            const completedCount = allCompleted.length;
+            const avgTicket = completedCount ? (completedTotalAll / completedCount) : 0;
+            const relevantBookings = appointments.filter(a => ['booked','completed'].includes(a.status));
+            const conversionRate = relevantBookings.length ? Math.round((completedCount / relevantBookings.length) * 100) : 0;
+
+            // Top services (by revenue, splitting appointment price across services if needed)
+            const serviceRevenueMap = {};
+            for (const a of allCompleted) {
+                if (a.services && Array.isArray(a.services) && a.services.length > 0) {
+                    const share = (parseFloat(a.price) || 0) / a.services.length;
+                    a.services.forEach(s => { const name = s.name || s.service || 'Service'; serviceRevenueMap[name] = (serviceRevenueMap[name] || 0) + share; });
+                } else if (a.service) {
+                    const name = a.service || 'Service'; serviceRevenueMap[name] = (serviceRevenueMap[name] || 0) + (parseFloat(a.price) || 0);
+                }
+            }
+            const topServices = Object.keys(serviceRevenueMap).map(k => ({ name: k, revenue: serviceRevenueMap[k] })).sort((a,b) => b.revenue - a.revenue).slice(0,3);
 
             // CSV export helper for money tab
             const downloadCSV = (rows = []) => {
@@ -2238,10 +2817,52 @@
             const getPlanName = () => { if(userProfile.plan === 'free_trial') return 'FREE PLAN'; if(userProfile.plan === 'basic') return 'BASIC PLAN'; if(userProfile.plan === 'pro') return 'PRO PLAN'; return 'MOGUL STATUS'; };
             const totalUnread = Object.values(unreadCounts).reduce((a, b) => a + b, 0);
 
+            // Time-left until next billing charge (human readable, updates every minute)
+            const [timeLeft, setTimeLeft] = useState(null);
+            useEffect(() => {
+                if (!userProfile || !userProfile.billingNextDue) { setTimeLeft(null); return; }
+                let mounted = true;
+                const update = () => {
+                    try {
+                        const due = new Date(userProfile.billingNextDue);
+                        const now = new Date();
+                        const diff = due - now;
+                        if (diff <= 0) {
+                            if (mounted) setTimeLeft('Due');
+                            return;
+                        }
+                        const days = Math.floor(diff / (24 * 60 * 60 * 1000));
+                        const hours = Math.floor((diff % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+                        const mins = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
+                        const parts = [];
+                        if (days > 0) parts.push(`${days}d`);
+                        parts.push(`${hours}h`);
+                        parts.push(`${mins}m`);
+                        if (mounted) setTimeLeft(parts.join(' '));
+                    } catch (e) {
+                        if (mounted) setTimeLeft(null);
+                    }
+                };
+                update();
+                const id = setInterval(update, 60 * 1000);
+                return () => { mounted = false; clearInterval(id); };
+            }, [userProfile && userProfile.billingNextDue]);
+
             return (
                 <div className={`min-h-screen w-full max-w-md mx-auto bg-black border-x border-zinc-800 relative shadow-2xl flex flex-col overflow-visible ${isGhost ? 'mt-8' : ''}`}>
                     {!isGhost && <div className="shrink-0 p-6 pb-4 border-b border-zinc-900 flex justify-between items-center bg-zinc-950 z-20">
-                        <div><p className="text-[10px] text-gold tracking-widest uppercase font-bold mb-1">{getPlanName()}</p><h1 className="text-3xl font-bold text-white brand-font tracking-wide">Black<span className="text-gold">Book</span></h1></div>
+                        <div className="flex items-start gap-4">
+                            <div>
+                                <p className="text-[10px] text-gold tracking-widest uppercase font-bold mb-1">{getPlanName()}</p>
+                                <h1 className="text-3xl font-bold text-white brand-font tracking-wide">Black<span className="text-gold">Book</span></h1>
+                            </div>
+                            {userProfile && userProfile.billingNextDue && new Date(userProfile.billingNextDue) > new Date() && (
+                                <div className="text-right ml-2">
+                                    <div className="text-[10px] text-zinc-400 uppercase">Next charge</div>
+                                    <div className="text-white font-mono font-bold">{timeLeft || 'Calculating...'}</div>
+                                </div>
+                            )}
+                        </div>
                         <div className="flex gap-4">
                             {isAmbassador && <button onClick={() => setShowSettings(!showSettings)} className="text-zinc-600 hover:text-gold"><SettingsIcon /></button>}
                             <button onClick={() => setShowSupport(true)} className="text-zinc-600 hover:text-gold"><SupportIcon /></button>
@@ -2254,7 +2875,7 @@
                             <div className="fade-in">
                                 <h2 className="text-xl text-white brand-font mb-4">Shop Settings</h2>
                                 <div className="space-y-4">
-                                    <div className="bg-zinc-900 p-4 rounded-xl border border-gold/30"><label className="text-[10px] text-gold uppercase font-bold mb-2 block">Custom Referral Code</label><input type="text" value={customCode} onChange={(e) => setCustomCode(e.target.value.toUpperCase())} className="w-full bg-black text-white text-sm p-3 rounded border border-zinc-800 font-mono text-center uppercase" placeholder="ENTER CODE"/></div>
+                                    <div className="bg-zinc-900 p-4 rounded-xl border border-gold/30"><label className="text-[10px] text-gold uppercase font-bold mb-2 block">Client Referral Code</label><input type="text" value={customCode} onChange={(e) => setCustomCode(e.target.value.toUpperCase())} className="w-full bg-black text-white text-sm p-3 rounded border border-zinc-800 font-mono text-center uppercase" placeholder="ENTER CODE"/></div>
                                     <div className="grid grid-cols-2 gap-4"><div><label className="text-[10px] text-zinc-500 uppercase font-bold">Open</label><input type="time" value={shopSettings.shopOpen} onChange={(e) => setShopSettings({...shopSettings, shopOpen: e.target.value})} className="w-full bg-zinc-900 text-white p-3 rounded border border-zinc-800" /></div><div><label className="text-[10px] text-zinc-500 uppercase font-bold">Close</label><input type="time" value={shopSettings.shopClose} onChange={(e) => setShopSettings({...shopSettings, shopClose: e.target.value})} className="w-full bg-zinc-900 text-white p-3 rounded border border-zinc-800" /></div></div>
                                     <div className="grid grid-cols-2 gap-4 mt-2"><div><label className="text-[10px] text-zinc-500 uppercase font-bold">Lunch Start</label><input type="time" value={shopSettings.lunchStart || ''} onChange={(e) => setShopSettings({...shopSettings, lunchStart: e.target.value})} className="w-full bg-zinc-900 text-white p-3 rounded border border-zinc-800" /></div><div><label className="text-[10px] text-zinc-500 uppercase font-bold">Lunch End</label><input type="time" value={shopSettings.lunchEnd || ''} onChange={(e) => setShopSettings({...shopSettings, lunchEnd: e.target.value})} className="w-full bg-zinc-900 text-white p-3 rounded border border-zinc-800" /></div></div>
                                     <div className="mt-2"><label className="text-[10px] text-zinc-500 uppercase font-bold">Slot Duration</label><select value={shopSettings.slotDuration} onChange={(e) => setShopSettings({...shopSettings, slotDuration: parseInt(e.target.value)})} className="w-full bg-zinc-900 text-white p-3 rounded border border-zinc-800"><option value="15">15 Min</option><option value="30">30 Min</option><option value="45">45 Min</option><option value="60">1 Hour</option><option value="90">90 Min</option></select></div>
@@ -2330,69 +2951,101 @@
                                             <div className="bg-zinc-900 border border-zinc-800 p-6 rounded-xl flex flex-col items-center justify-center text-center"><p className="text-xs text-zinc-400 uppercase tracking-widest font-bold mb-1">Month (completed)</p><h3 className="text-2xl leading-tight text-white brand-font">{'$' + moneyMonth.toFixed(2)}</h3></div>
                                         </div>
 
-                                        <div className="flex items-center justify-between gap-3 mt-2">
-                                            <div className="flex items-center gap-2 min-w-0">
-                                                <div className="text-xs text-zinc-400 mr-2">Date</div>
-                                                <input type="date" value={viewDate} onChange={e => setViewDate(e.target.value)} className="w-36 bg-zinc-900 border border-zinc-800 p-2 rounded text-white text-sm" />
+                                        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 mt-3">
+                                            <div className="bg-zinc-900 border border-zinc-800 p-4 rounded-lg text-center">
+                                                <div className="text-xs text-zinc-400 uppercase tracking-widest font-bold mb-1">Pending (booked)</div>
+                                                <div className="text-gold font-mono font-bold text-lg">{'$' + pendingMoney.toFixed(2)}</div>
+                                                <div className="text-[11px] text-zinc-500 mt-2">Booked but not completed</div>
                                             </div>
-                                            <div className="flex items-center gap-2 min-w-0">
-                                                <label className="text-xs text-zinc-400">Filter</label>
-                                                <select value={moneyFilter} onChange={(e) => setMoneyFilter(e.target.value)} className="w-44 truncate bg-zinc-900 border border-zinc-800 p-2 rounded text-white text-sm">
-                                                    <option value="all">All (booked/completed)</option>
-                                                    <option value="completed">Completed</option>
-                                                    <option value="booked">Booked</option>
-                                                </select>
+                                            <div className="bg-zinc-900 border border-zinc-800 p-4 rounded-lg text-center">
+                                                <div className="text-xs text-zinc-400 uppercase tracking-widest font-bold mb-1">Avg Ticket</div>
+                                                <div className="text-gold font-mono font-bold text-lg">{'$' + avgTicket.toFixed(2)}</div>
+                                                <div className="text-[11px] text-zinc-500 mt-2">Across {completedCount || 0} completed appointments</div>
                                             </div>
-                                        </div>
+                                            <div className="bg-zinc-900 border border-zinc-800 p-4 rounded-lg text-center">
+                                                <div className="text-xs text-zinc-400 uppercase tracking-widest font-bold mb-1">Conv.</div>
+                                                <div className="text-gold font-mono font-bold text-lg">{conversionRate + '%'}</div>
+                                                <div className="text-[11px] text-zinc-500 mt-2">Completed ÷ Total</div>
+                                            </div>
+                                            </div>
 
-                                        <div className="relative bg-zinc-900 border border-zinc-800 rounded-xl p-3 mt-3">
-                                            <div className="absolute top-3 right-4 text-sm text-gold font-mono font-bold">{'Total: $' + moneyListTotal.toFixed(2)}</div>
-                                            <div className="mb-6"><div className="text-xs text-zinc-400 uppercase">Appointments ({moneyList.length})</div></div>
-                                            <div className="space-y-2">
-                                                {moneyList.length === 0 && <div className="text-zinc-500 text-sm py-4 text-center">No appointments for this selection.</div>}
-                                                {moneyList.map(a => (
-                                                    <div key={a.id} className="p-3 rounded-lg border border-zinc-800 flex items-center justify-between">
-                                                        <div>
-                                                            <div className="text-sm text-white font-bold">{a.clientName || 'Guest'}</div>
-                                                            <div className="text-xs text-zinc-500">{a.date} • {a.time ? formatHM(a.time) : ''} • {a.services && a.services.length ? a.services.map(s=>s.name).join(', ') : (a.service || '')}</div>
+                                        <div className="mt-3">
+                                            <div className="bg-zinc-900 border border-zinc-800 p-4 rounded-xl">
+                                                <div className="text-xs text-zinc-400 uppercase tracking-widest font-bold mb-2">Top Services (revenue)</div>
+                                                <div className="space-y-2">
+                                                    {topServices.length === 0 && <div className="text-zinc-500 text-sm">No service data</div>}
+                                                    {topServices.map(s => (
+                                                        <div key={s.name} className="flex items-center justify-between">
+                                                            <div className="text-sm text-white truncate mr-2">{s.name}</div>
+                                                            <div className="text-gold font-mono font-bold text-sm">{'$' + s.revenue.toFixed(2)}</div>
                                                         </div>
-                                                        <div className="text-right">
-                                                            <div className="text-gold font-mono font-bold">{'$' + (a.price||0).toFixed(2)}</div>
-                                                            {a.tipAmount ? <div className="text-xs text-zinc-400">{'Tip: $' + (a.tipAmount||0).toFixed(2)}</div> : null}
-                                                            <div className="text-[10px] text-zinc-400 mt-1">{a.status || 'booked'}</div>
-                                                        </div>
-                                                    </div>
-                                                ))}
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 )}
                                 {activeTab === 'shop' && (
                                     <div className="fade-in pb-20">
-                                        <h2 className="text-xl text-white brand-font mb-4">Shop Products</h2>
+                                        <div className="flex items-center justify-between mb-4">
+                                            <h2 className="text-xl text-white brand-font">Shop Products</h2>
+                                            {/* header buttons removed — use Shop Settings Add Product / Create Coupon */}
+                                        </div>
                                         <div className="bg-zinc-900 p-4 rounded-xl border border-gold/30 mb-6">
-                                            <h4 className="text-white text-sm font-bold uppercase mb-4">Add / Edit Product</h4>
-                                            <div className="space-y-3 mb-4">
-                                                <input type="text" value={newProductName} onChange={(e) => setNewProductName(e.target.value)} placeholder="Product Name" className="w-full bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
-                                                <textarea value={newProductDesc} onChange={(e) => setNewProductDesc(e.target.value)} placeholder="Description (optional)" className="w-full bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold h-20" />
-                                                <div className="flex gap-2">
-                                                    <input type="number" value={newProductPrice} onChange={(e) => setNewProductPrice(e.target.value)} placeholder="Price ($)" className="w-1/3 bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
-                                                    <input type="number" value={newProductStock} onChange={(e) => setNewProductStock(e.target.value)} placeholder="Stock (optional)" className="w-1/3 bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
-                                                </div>
-                                            </div>
-                                            <div className="flex gap-2">
-                                                <button onClick={addProduct} className="flex-1 bg-gold text-black font-bold py-3 rounded text-xs uppercase shadow-lg hover:bg-white transition-colors">{editingProductId ? 'Save Product' : 'Add Product'}</button>
-                                                {editingProductId && (<button onClick={() => { setEditingProductId(null); setNewProductName(''); setNewProductPrice(''); setNewProductStock(''); setNewProductDesc(''); }} className="px-3 py-3 bg-zinc-800 text-white rounded text-xs uppercase">Cancel</button>)}
+                                            <div className="flex items-center justify-between">
+                                                <h4 className="text-white text-sm font-bold uppercase">Products</h4>
+                                                {userProfile?.role === 'barber' ? (
+                                                    <div className="flex gap-2">
+                                                        <button onClick={() => { setEditingProductId(null); setNewProductName(''); setNewProductPrice(''); setNewProductStock(''); setNewProductDesc(''); setNewProductImageUrl(''); setNewProductImageFile(null); setShowAddProductModalAdmin(true); }} className="px-3 py-2 bg-gold text-black rounded">Add Product</button>
+                                                        <button onClick={() => setShowCreateCouponModal(true)} className="px-3 py-2 bg-zinc-800 text-white rounded">Create Coupon</button>
+                                                    </div>
+                                                ) : (
+                                                    <button onClick={() => { setEditingProductId(null); setNewProductName(''); setNewProductPrice(''); setNewProductStock(''); setNewProductDesc(''); setNewProductImageUrl(''); setNewProductImageFile(null); setShowAddProductModalAdmin(true); }} className="px-3 py-2 bg-gold text-black rounded">Add Product</button>
+                                                )}
                                             </div>
                                         </div>
+
+                                        {showAddProductModalAdmin && (
+                                            <div className="fixed inset-0 z-80 flex items-center justify-center p-6">
+                                                <div className="absolute inset-0 bg-black/80" onClick={() => { setShowAddProductModalAdmin(false); setEditingProductId(null); }} />
+                                                <div className="relative z-90 bg-zinc-950 w-full max-w-lg rounded-xl border border-zinc-800 p-6 shadow-2xl">
+                                                    <button onClick={() => { setShowAddProductModalAdmin(false); setEditingProductId(null); }} className="absolute top-3 right-3 z-80 bg-zinc-900 text-white p-2 rounded">Close</button>
+                                                    <h3 className="text-white font-bold mb-3">{editingProductId ? 'Edit Product' : 'Add Product'}</h3>
+                                                    <div className="space-y-3 mb-4">
+                                                        <input placeholder="Product Name" value={newProductName} onChange={(e) => setNewProductName(e.target.value)} className="w-full bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
+                                                        <textarea value={newProductDesc} onChange={(e) => setNewProductDesc(e.target.value)} placeholder="Description (optional)" className="w-full bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold h-20" />
+                                                        <div className="flex gap-2">
+                                                            <input type="number" value={newProductPrice} onChange={(e) => setNewProductPrice(e.target.value)} placeholder="Price ($)" className="w-1/3 bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
+                                                            <input type="number" value={newProductStock} onChange={(e) => setNewProductStock(e.target.value)} placeholder="Stock (optional)" className="w-1/3 bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
+                                                        </div>
+                                                        <div className="mt-2">
+                                                            <label className="text-xs text-zinc-400 mb-1 block">Product Image (optional)</label>
+                                                            <div className="flex items-center gap-3">
+                                                                <input type="file" accept="image/*" onChange={(e) => { const f = e.target.files && e.target.files[0]; setNewProductImageFile(f || null); if (f) setNewProductImageUrl(URL.createObjectURL(f)); }} className="bg-black text-white text-sm" />
+                                                                {newProductImageUrl ? (<img src={newProductImageUrl} alt="preview" className="w-16 h-16 object-cover rounded" />) : null}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex gap-2">
+                                                        <button onClick={async () => { await addProduct(); setShowAddProductModalAdmin(false); }} disabled={newProductUploading} className="flex-1 bg-gold text-black font-bold py-3 rounded text-xs uppercase shadow-lg hover:bg-white transition-colors">{newProductUploading ? 'Uploading...' : (editingProductId ? 'Save Product' : 'Add Product')}</button>
+                                                        <button onClick={() => { setShowAddProductModalAdmin(false); setEditingProductId(null); setNewProductName(''); setNewProductPrice(''); setNewProductStock(''); setNewProductDesc(''); setNewProductImageUrl(''); setNewProductImageFile(null); }} className="px-3 py-3 bg-zinc-800 text-white rounded text-xs uppercase">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
                                         <div className="space-y-2">
-                                            {products.map(p => (
+                                                {products.map(p => (
                                                 <div key={p.id} className="bg-zinc-900 p-4 rounded-lg border border-zinc-800 flex justify-between items-start gap-4">
                                                     <div className="flex-1">
                                                         <div className="flex items-center justify-between gap-4">
                                                             <div>
-                                                                <h3 className="text-white font-bold text-sm">{p.name}</h3>
-                                                                <div className="text-zinc-400 text-xs">{p.description}</div>
+                                                                <div className="flex items-center gap-3">
+                                                                    {p.imageUrl ? (<img src={p.imageUrl} className="w-14 h-14 object-cover rounded" alt={p.name} />) : (<div className="w-14 h-14 bg-zinc-800 rounded flex items-center justify-center text-zinc-500">No Image</div>)}
+                                                                    <div>
+                                                                        <h3 className="text-white font-bold text-sm">{p.name}</h3>
+                                                                        <div className="text-zinc-400 text-xs">{p.description}</div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                             <div className="text-right">
                                                                 <div className="text-gold font-mono text-sm">${(p.price || 0).toFixed ? (p.price).toFixed(2) : (p.price || 0)}</div>
@@ -2401,7 +3054,7 @@
                                                         </div>
                                                     </div>
                                                     <div className="flex flex-col gap-2">
-                                                        <button onClick={() => { setEditingProductId(p.id); setNewProductName(p.name || ''); setNewProductPrice(p.price || ''); setNewProductStock(p.stock || ''); setNewProductDesc(p.description || ''); }} className="px-3 py-2 bg-zinc-800 text-white rounded text-xs">Edit</button>
+                                                        <button onClick={() => { setEditingProductId(p.id); setNewProductName(p.name || ''); setNewProductPrice(p.price || ''); setNewProductStock(p.stock || ''); setNewProductDesc(p.description || ''); setNewProductImageUrl(p.imageUrl || ''); setNewProductImageFile(null); setShowAddProductModalAdmin(true); }} className="px-3 py-2 bg-zinc-800 text-white rounded text-xs">Edit</button>
                                                         <button onClick={() => deleteProduct(p.id)} className="px-3 py-2 bg-red-700 text-white rounded text-xs">Delete</button>
                                                     </div>
                                                 </div>
@@ -2422,10 +3075,17 @@
                                         <div className="space-y-3">
                                             {filteredClients.map(client => (
                                                 <div key={client.id} onClick={() => setEditingClient(client)} className="bg-zinc-900 p-4 rounded-lg border border-zinc-800 hover:border-zinc-600 transition-colors cursor-pointer flex items-start justify-between">
-                                                    <div>
-                                                        <h3 className="text-white font-medium text-lg">{client.name}</h3>
-                                                        <p className="text-xs text-zinc-400 mt-1">{client.phone} {client.email ? '• ' + client.email : ''}</p>
-                                                        {client.formula && <p className="text-xs text-zinc-500 mt-1">{client.formula}</p>}
+                                                    <div className="flex items-center gap-3">
+                                                        {client.photoURL ? (
+                                                            <img src={client.photoURL} alt={client.name} className="w-12 h-12 object-cover rounded-full" />
+                                                        ) : (
+                                                            <div className="w-12 h-12 bg-zinc-800 rounded-full flex items-center justify-center text-zinc-500 font-bold">{(client.name || '').charAt(0) || 'C'}</div>
+                                                        )}
+                                                        <div>
+                                                            <h3 className="text-white font-medium text-lg">{client.name}</h3>
+                                                            <p className="text-xs text-zinc-400 mt-1">{client.phone} {client.email ? '• ' + client.email : ''}</p>
+                                                            {client.formula && <p className="text-xs text-zinc-500 mt-1">{client.formula}</p>}
+                                                        </div>
                                                     </div>
                                                     <div className="flex items-center gap-2">
                                                         {client.email && userProfile.plan !== 'free_trial' && (
@@ -2453,10 +3113,17 @@
                                             return (
                                                 <div key={client.id} onClick={() => openChat(client)} className="p-4 bg-zinc-900 border border-zinc-800 rounded-lg flex items-center justify-between cursor-pointer hover:border-gold transition-colors">
                                                     <div className="flex items-center gap-3">
-                                                        <div className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-gold font-bold relative">
-                                                            {client.name.charAt(0)}
-                                                            {unreadCount > 0 && <span className="badge-num">{unreadCount}</span>}
-                                                        </div>
+                                                        {client.photoURL ? (
+                                                            <div className="relative">
+                                                                <img src={client.photoURL} alt={client.name} className="w-10 h-10 rounded-full object-cover" />
+                                                                {unreadCount > 0 && <span className="badge-num">{unreadCount}</span>}
+                                                            </div>
+                                                        ) : (
+                                                            <div className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-gold font-bold relative">
+                                                                {(client.name || '').charAt(0) || 'C'}
+                                                                {unreadCount > 0 && <span className="badge-num">{unreadCount}</span>}
+                                                            </div>
+                                                        )}
                                                         <div><h3 className="text-white font-bold text-sm">{client.name}</h3><p className="text-zinc-500 text-xs">{client.email ? "Tap to chat" : "No Email"}</p></div>
                                                     </div>
                                                     <ChevronRight className="text-zinc-600" />
@@ -2519,38 +3186,61 @@
                                 {activeTab === 'menu' && (
                                     <div className="fade-in pb-20">
                                         <h2 className="text-xl text-white brand-font mb-4">Service Menu</h2>
-                                        <div className="bg-zinc-900 p-4 rounded-xl border border-gold/30 mb-6">
-                                            <h4 className="text-white text-sm font-bold uppercase mb-4">Add New Service</h4>
-                                                <div className="space-y-3 mb-4">
-                                                <input type="text" value={newServiceName} onChange={(e) => setNewServiceName(e.target.value)} placeholder="Service Name (e.g. Fade)" className="w-full bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
-                                                <textarea value={newServiceDesc} onChange={(e) => setNewServiceDesc(e.target.value)} placeholder="Short description (optional)" className="w-full bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold h-20" />
-                                                <div className="flex gap-2">
-                                                    <input type="number" value={newServicePrice} onChange={(e) => setNewServicePrice(e.target.value)} placeholder="Price ($)" className="w-1/4 bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
-                                                    <input type="number" value={newSalePrice} onChange={(e) => setNewSalePrice(e.target.value)} placeholder="Sale Price (Opt)" className="w-1/4 bg-black text-gold placeholder-zinc-600 text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
-                                                    <input type="number" value={newServiceDuration} onChange={(e) => setNewServiceDuration(e.target.value)} placeholder="Duration (min)" className="w-1/4 bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
-                                                    <input type="text" value={newServiceCategory} onChange={(e) => setNewServiceCategory(e.target.value)} placeholder="Category (Opt)" className="w-1/4 bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
-                                                </div>
-                                                <div className="flex items-center gap-4">
-                                                    <label className="text-zinc-400 text-sm"><input type="checkbox" checked={newServiceRecommended} onChange={(e) => setNewServiceRecommended(e.target.checked)} className="mr-2"/> Recommended</label>
-                                                    <label className="text-zinc-400 text-sm"><input type="checkbox" checked={newServiceActive} onChange={(e) => setNewServiceActive(e.target.checked)} className="mr-2"/> Active</label>
-                                                </div>
-                                            </div>
-                                            <div className="flex gap-2">
-                                                <button onClick={addService} className="flex-1 bg-gold text-black font-bold py-3 rounded text-xs uppercase shadow-lg hover:bg-white transition-colors">{editingServiceId ? 'Save Service' : 'Add Service'}</button>
-                                                {editingServiceId && (<button onClick={() => { setEditingServiceId(null); setNewServiceName(''); setNewServicePrice(''); setNewSalePrice(''); setNewServiceDuration(''); setNewServiceDesc(''); setNewServiceCategory(''); setNewServiceRecommended(false); setNewServiceActive(true); }} className="px-3 py-3 bg-zinc-800 text-white rounded text-xs uppercase">Cancel</button>)}
-                                            </div>
+                                        <div className="flex gap-3 mb-4">
+                                            <button onClick={() => setShowAddServiceModal(true)} className="px-4 py-2 bg-gold text-black font-bold rounded">Add New Service</button>
+                                            <button onClick={() => setShowCreateCouponModal(true)} className="px-4 py-2 bg-zinc-800 text-white rounded">Create Coupon</button>
                                         </div>
-                                        <div className="bg-zinc-900 p-4 rounded-xl border border-zinc-800 mb-6">
-                                            <h4 className="text-white text-sm font-bold uppercase mb-4">Create Coupon</h4>
-                                            <div className="space-y-3 mb-4">
-                                                <input type="text" value={newCouponCode} onChange={(e) => setNewCouponCode(e.target.value)} placeholder="Code (e.g. SAVE10)" className="w-full bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none uppercase focus:border-gold" />
-                                                <div className="flex gap-2">
-                                                    <select value={newCouponType} onChange={(e) => setNewCouponType(e.target.value)} className="w-1/3 bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold"><option value="fixed">$ Fixed</option><option value="percent">% Percent</option></select>
-                                                    <input type="number" value={newCouponValue} onChange={(e) => setNewCouponValue(e.target.value)} placeholder="Value" className="w-2/3 bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
+
+                                        {/* Add Service Modal */}
+                                        {showAddServiceModal && (
+                                            <div className="fixed inset-0 z-70 flex items-center justify-center p-6">
+                                                <div className="absolute inset-0 bg-black/80" onClick={() => setShowAddServiceModal(false)} />
+                                                <div className="relative z-80 bg-zinc-950 w-full max-w-lg rounded-xl border border-zinc-800 p-6 shadow-2xl">
+                                                    <button onClick={() => setShowAddServiceModal(false)} className="absolute top-3 right-3 z-80 bg-zinc-900 text-white p-2 rounded">Close</button>
+                                                    <h3 className="text-white font-bold mb-3">Add New Service</h3>
+                                                    <div className="space-y-3 mb-4">
+                                                        <input type="text" value={newServiceName} onChange={(e) => setNewServiceName(e.target.value)} placeholder="Service Name (e.g. Fade)" className="w-full bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
+                                                        <textarea value={newServiceDesc} onChange={(e) => setNewServiceDesc(e.target.value)} placeholder="Short description (optional)" className="w-full bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold h-20" />
+                                                        <div className="flex gap-2">
+                                                            <input type="number" value={newServicePrice} onChange={(e) => setNewServicePrice(e.target.value)} placeholder="Price ($)" className="w-1/4 bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
+                                                            <input type="number" value={newSalePrice} onChange={(e) => setNewSalePrice(e.target.value)} placeholder="Sale Price (Opt)" className="w-1/4 bg-black text-gold placeholder-zinc-600 text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
+                                                            <input type="number" value={newServiceDuration} onChange={(e) => setNewServiceDuration(e.target.value)} placeholder="Duration (min)" className="w-1/4 bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
+                                                            <input type="text" value={newServiceCategory} onChange={(e) => setNewServiceCategory(e.target.value)} placeholder="Category (Opt)" className="w-1/4 bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
+                                                        </div>
+                                                        <div className="flex items-center gap-4">
+                                                            <label className="text-zinc-400 text-sm"><input type="checkbox" checked={newServiceRecommended} onChange={(e) => setNewServiceRecommended(e.target.checked)} className="mr-2"/> Recommended</label>
+                                                            <label className="text-zinc-400 text-sm"><input type="checkbox" checked={newServiceActive} onChange={(e) => setNewServiceActive(e.target.checked)} className="mr-2"/> Active</label>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex gap-2">
+                                                        <button onClick={async () => { await addService(); setShowAddServiceModal(false); }} className="flex-1 bg-gold text-black font-bold py-3 rounded text-xs uppercase shadow-lg hover:bg-white transition-colors">{editingServiceId ? 'Save Service' : 'Add Service'}</button>
+                                                        <button onClick={() => setShowAddServiceModal(false)} className="px-3 py-3 bg-zinc-800 text-white rounded text-xs uppercase">Cancel</button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <button onClick={addCoupon} className="w-full bg-zinc-800 text-white font-bold py-3 rounded text-xs uppercase hover:bg-zinc-700 transition-colors">Add Coupon</button>
-                                        </div>
+                                        )}
+
+                                        {/* Create Coupon Modal */}
+                                        {showCreateCouponModal && (
+                                            <div className="fixed inset-0 z-70 flex items-center justify-center p-6">
+                                                <div className="absolute inset-0 bg-black/80" onClick={() => setShowCreateCouponModal(false)} />
+                                                <div className="relative z-80 bg-zinc-950 w-full max-w-md rounded-xl border border-zinc-800 p-6 shadow-2xl">
+                                                    <button onClick={() => setShowCreateCouponModal(false)} className="absolute top-3 right-3 z-80 bg-zinc-900 text-white p-2 rounded">Close</button>
+                                                    <h3 className="text-white font-bold mb-3">Create Coupon</h3>
+                                                    <div className="space-y-3 mb-4">
+                                                        <input type="text" value={newCouponCode} onChange={(e) => setNewCouponCode(e.target.value)} placeholder="Code (e.g. SAVE10)" className="w-full bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none uppercase focus:border-gold" />
+                                                        <div className="flex gap-2">
+                                                            <select value={newCouponType} onChange={(e) => setNewCouponType(e.target.value)} className="w-1/3 bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold"><option value="fixed">$ Fixed</option><option value="percent">% Percent</option></select>
+                                                            <input type="number" value={newCouponValue} onChange={(e) => setNewCouponValue(e.target.value)} placeholder="Value" className="w-2/3 bg-black text-white text-sm p-3 rounded border border-zinc-800 outline-none focus:border-gold" />
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex gap-2">
+                                                        <button onClick={async () => { await addCoupon(); setShowCreateCouponModal(false); }} className="flex-1 bg-gold text-black font-bold py-3 rounded text-xs uppercase">Add Coupon</button>
+                                                        <button onClick={() => setShowCreateCouponModal(false)} className="px-3 py-3 bg-zinc-800 text-white rounded text-xs uppercase">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
                                         <div className="space-y-2">
                                             {services.map(svc => (
                                                 <div key={svc.id} className="bg-zinc-900 p-4 rounded-lg border border-zinc-800 flex justify-between items-start gap-4">
@@ -2570,7 +3260,7 @@
                                                     </div>
                                                     <div className="flex flex-col items-end gap-2">
                                                         <div className="flex gap-2">
-                                                            <button onClick={() => { setNewServiceName(svc.name); setNewServicePrice(svc.price); setNewSalePrice(svc.salePrice || ''); setNewServiceDuration(svc.duration || shopSettings.slotDuration); setNewServiceDesc(svc.description || ''); setNewServiceCategory(svc.category || ''); setNewServiceRecommended(!!svc.recommended); setNewServiceActive(svc.active !== false); setEditingServiceId(svc.id); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="text-zinc-400 text-xs uppercase font-bold">Edit</button>
+                                                            <button onClick={() => { setNewServiceName(svc.name); setNewServicePrice(svc.price); setNewSalePrice(svc.salePrice || ''); setNewServiceDuration(svc.duration || shopSettings.slotDuration); setNewServiceDesc(svc.description || ''); setNewServiceCategory(svc.category || ''); setNewServiceRecommended(!!svc.recommended); setNewServiceActive(svc.active !== false); setEditingServiceId(svc.id); setShowAddServiceModal(true); }} className="text-zinc-400 text-xs uppercase font-bold">Edit</button>
                                                             <button onClick={() => deleteService(svc.id)} className="text-red-500 text-xs uppercase font-bold">Delete</button>
                                                         </div>
                                                         {!svc.active && <div className="text-zinc-500 text-[10px]">Hidden</div>}
@@ -2816,7 +3506,7 @@
                                 <button onClick={() => onEnter('barber')} className="text-zinc-400 hover:text-white text-xs font-bold uppercase tracking-wider hidden md:block">
                                     Login
                                 </button>
-                                <button onClick={() => onEnter('barber')} className="px-5 py-2 bg-gold text-black rounded text-xs font-bold uppercase hover:bg-white transition-colors">
+                                <button onClick={() => onEnter('barber_register')} aria-label="Get started" className="cta-primary">
                                     Get Started
                                 </button>
                             </div>
@@ -2829,7 +3519,7 @@
 
                         <div className="max-w-4xl mx-auto relative z-10 fade-in">
                             <span className="text-gold font-bold tracking-[0.2em] text-xs uppercase mb-4 block">The Connection Point</span>
-                            <h1 className="text-5xl md:text-7xl font-bold brand-font mb-6 leading-tight enter-up" style={{animationDelay:'120ms'}}>
+                            <h1 className="text-5xl md:text-7xl font-bold brand-font mb-6 leading-tight enter-up hero-heading" style={{animationDelay:'120ms'}}>
                                 ELEVATE YOUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white gradient-anim">CUT.</span>
                             </h1>
                             <style>{`.gradient-anim{background-size:200% 200% !important; animation:grad 6s linear infinite}@keyframes grad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}} .enter-up{opacity:0;transform:translateY(12px);animation:enterUp 650ms cubic-bezier(.2,.9,.3,1) forwards;}@keyframes enterUp{to{opacity:1;transform:none}} .enter-fade{opacity:0;animation:fadeIn .9s forwards}@keyframes fadeIn{to{opacity:1}}`}</style>
@@ -3063,6 +3753,26 @@
             const [expanded, setExpanded] = useState({});
             const [loading, setLoading] = useState(false);
             const [error, setError] = useState('');
+            const [discountCode, setDiscountCode] = useState('');
+            const [discountApplying, setDiscountApplying] = useState(false);
+            const [discountApplied, setDiscountApplied] = useState(null);
+
+            const validateDiscount = async (code) => {
+                if (!code || !code.trim()) return { ok: false, error: 'Enter a discount code' };
+                setDiscountApplying(true);
+                try {
+                    const normalized = (code || '').toUpperCase().trim();
+                    const q = query(collection(db, 'discountCodes'), where('code', '==', normalized), where('active', '==', true), limit(1));
+                    const snap = await getDocs(q);
+                    if (snap.empty) return { ok: false, error: 'Invalid code' };
+                    const d = snap.docs[0];
+                    const data = { id: d.id, ...d.data() };
+                    setDiscountApplied(data);
+                    return { ok: true, data };
+                } catch (e) {
+                    return { ok: false, error: 'Validation failed' };
+                } finally { setDiscountApplying(false); }
+            };
 
             const plans = [
                 {
@@ -3138,38 +3848,112 @@
                 setError('');
                 setLoading(true);
                 try {
-                    if (!signupData?.email || !signupData?.password) throw new Error('Missing signup information.');
+                    // If user is already authenticated, use their account information instead
+                    const currentUser = auth.currentUser;
+
+                    // If a free discount code has been applied, activate the plan immediately without payment
+                    if (discountApplied && discountApplied.type === 'free') {
+                        if (discountApplied.planId && discountApplied.planId !== selectedPlan) {
+                            throw new Error('Discount code not valid for this plan.');
+                        }
+                        if (!currentUser) {
+                            if (!signupData?.email || !signupData?.password) throw new Error('Missing signup information.');
+                            const userCredential = await createUserWithEmailAndPassword(auth, signupData.email, signupData.password);
+                            const userDoc = {
+                                email: signupData.email,
+                                firstName: signupData.firstName || '',
+                                phone: signupData.phone || '',
+                                joined: new Date().toISOString(),
+                                role: 'barber',
+                                plan: selectedPlan === 'free' ? 'free_trial' : selectedPlan,
+                                billingConfirmed: true,
+                                billingNextDue: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
+                                provider: 'discount',
+                                credits: selectedPlan === 'pro' ? 500 : selectedPlan === 'mogul' ? 1500 : 0,
+                                shopOpen: '09:00', shopClose: '17:00', lunchStart: '', lunchEnd: '', slotDuration: 60
+                            };
+                            await setDoc(doc(db, 'users', userCredential.user.uid), userDoc);
+                            showToast('Discount applied — plan activated', 'success');
+                            onDone && onDone();
+                            setLoading(false);
+                            return;
+                        } else {
+                            const uid = currentUser.uid;
+                            const userDoc = {
+                                plan: selectedPlan === 'free' ? 'free_trial' : selectedPlan,
+                                billingConfirmed: true,
+                                billingNextDue: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
+                                provider: 'discount',
+                                credits: selectedPlan === 'pro' ? 500 : selectedPlan === 'mogul' ? 1500 : 0,
+                                updatedAt: new Date().toISOString()
+                            };
+                            await updateDoc(doc(db, 'users', uid), userDoc);
+                            showToast('Discount applied — plan activated', 'success');
+                            onDone && onDone();
+                            setLoading(false);
+                            return;
+                        }
+                    }
+
+                    if (!currentUser) {
+                        if (!signupData?.email || !signupData?.password) throw new Error('Missing signup information.');
+                    }
 
                     // If free trial, create account immediately
                     if (selectedPlan === 'free') {
                         const storedPlan = 'free_trial';
-                        const userCredential = await createUserWithEmailAndPassword(auth, signupData.email, signupData.password);
-                        const userDoc = {
-                            email: signupData.email,
-                            firstName: signupData.firstName || '',
-                            phone: signupData.phone || '',
-                            joined: new Date().toISOString(),
-                            role: 'barber',
-                            plan: storedPlan,
-                            credits: 0,
-                            shopOpen: '09:00', shopClose: '17:00', lunchStart: '', lunchEnd: '', slotDuration: 60,
-                            trialStartDate: new Date().toISOString(),
-                            trialLengthDays: 90,
-                            billingConfirmed: false
-                        };
-                        await setDoc(doc(db, 'users', userCredential.user.uid), userDoc);
-                        showToast('Account created. Welcome!', 'success');
-                        onDone && onDone();
-                        setLoading(false);
-                        return;
+                        if (currentUser) {
+                            const uid = currentUser.uid;
+                            const userDoc = {
+                                plan: storedPlan,
+                                trialStartDate: new Date().toISOString(),
+                                trialLengthDays: 90,
+                                billingConfirmed: false
+                            };
+                            await updateDoc(doc(db, 'users', uid), { ...userDoc, updatedAt: new Date().toISOString() });
+                            showToast('Trial activated for your account', 'success');
+                            onDone && onDone();
+                            setLoading(false);
+                            return;
+                        } else {
+                            const userCredential = await createUserWithEmailAndPassword(auth, signupData.email, signupData.password);
+                            const userDoc = {
+                                email: signupData.email,
+                                firstName: signupData.firstName || '',
+                                phone: signupData.phone || '',
+                                joined: new Date().toISOString(),
+                                role: 'barber',
+                                plan: storedPlan,
+                                credits: 0,
+                                shopOpen: '09:00', shopClose: '17:00', lunchStart: '', lunchEnd: '', slotDuration: 60,
+                                trialStartDate: new Date().toISOString(),
+                                trialLengthDays: 90,
+                                billingConfirmed: false
+                            };
+                            await setDoc(doc(db, 'users', userCredential.user.uid), userDoc);
+                            showToast('Account created. Welcome!', 'success');
+                            onDone && onDone();
+                            setLoading(false);
+                            return;
+                        }
                     }
 
                     // For paid plans: create a PayPal order (no payment links) and redirect to approval
-                    const pResp = await fetch('https://api-6hszbgalfq-uc.a.run.app/createPayPalOrder', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ signupData, planId: selectedPlan })
-                    });
+                    let pResp;
+                    if (currentUser) {
+                        const idToken = await currentUser.getIdToken();
+                        pResp = await fetch('https://api-6hszbgalfq-uc.a.run.app/createPayPalOrderExisting', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + idToken },
+                            body: JSON.stringify({ planId: selectedPlan })
+                        });
+                    } else {
+                        pResp = await fetch('https://api-6hszbgalfq-uc.a.run.app/createPayPalOrder', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ signupData, planId: selectedPlan })
+                        });
+                    }
                     if (!pResp.ok) {
                         const text = await pResp.text().catch(() => 'Failed to create PayPal order');
                         throw new Error(text || 'Failed to create payment');
@@ -3206,14 +3990,14 @@
                         </div>
                         <div className="space-y-3">
                             {plans.map(p => (
-                                <div key={p.id} className={`p-4 rounded-lg border ${selectedPlan===p.id ? 'border-gold bg-zinc-950' : 'border-zinc-800 bg-black'}`}>
+                                <div key={p.id} className={`plan-tile p-4 rounded-lg ${selectedPlan===p.id ? 'plan-primary' : ''}`}>
                                     <div className="flex justify-between items-start">
                                         <div>
                                             <div className="text-xs text-zinc-400 uppercase font-bold">{p.title}</div>
                                             <div className="text-2xl font-extrabold text-white mt-1">{p.price} {p.note && <span className="text-xs text-zinc-500">{p.note}</span>}</div>
                                         </div>
                                         <div className="flex flex-col items-end gap-2">
-                                            <button onClick={() => setSelectedPlan(p.id)} className={`px-3 py-1 rounded ${selectedPlan===p.id ? 'bg-gold text-black' : 'bg-zinc-800 text-white'}`}>{selectedPlan===p.id ? 'Selected' : 'Select'}</button>
+                                            <button onClick={() => setSelectedPlan(p.id)} className={`px-3 py-1 rounded ${selectedPlan===p.id ? 'cta-primary' : 'cta-secondary'}`}>{selectedPlan===p.id ? 'Selected' : 'Select'}</button>
                                             <button onClick={() => setExpanded(s => ({ ...s, [p.id]: !s[p.id] }))} className="text-xs text-zinc-400 underline">Details</button>
                                         </div>
                                     </div>
@@ -3245,9 +4029,81 @@
                         </div>
 
                         {error && <p className="text-red-500 text-xs mt-3">{error}</p>}
-                        <div className="flex gap-2 mt-4">
-                            <button onClick={() => history.back()} className="flex-1 py-3 bg-zinc-800 text-white rounded">Back</button>
-                            <button onClick={handleConfirm} disabled={loading} className="flex-1 py-3 bg-gold text-black rounded font-bold">{loading ? 'Processing...' : 'Confirm & Register'}</button>
+                        <div className="mt-4">
+                            <div className="flex gap-2 mb-3">
+                                <input value={discountCode} onChange={e => setDiscountCode(e.target.value)} placeholder="Have a discount code?" className="flex-1 p-3 bg-zinc-900 border border-zinc-800 rounded text-white outline-none" />
+                                <button onClick={async () => {
+                                    setError('');
+                                    const resp = await validateDiscount(discountCode);
+                                    if (!resp.ok) { setError(resp.error || 'Invalid code'); setDiscountApplied(null); } else { showToast('Discount applied', 'success'); }
+                                }} disabled={discountApplying} className="px-4 py-3 bg-zinc-800 text-white rounded">{discountApplying ? 'Checking...' : 'Apply'}</button>
+                            </div>
+                            {discountApplied && (<div className="text-xs text-green-400 mb-3">Code applied: {discountApplied.code} — {discountApplied.type}</div>)}
+                            <div className="flex gap-2 mt-2">
+                                <button onClick={() => history.back()} className="flex-1 py-3 bg-zinc-800 text-white rounded">Back</button>
+                                <button onClick={handleConfirm} disabled={loading} className="flex-1 py-3 bg-gold text-black rounded font-bold">{loading ? 'Processing...' : 'Confirm & Register'}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // --- PRICING DETAILS ---
+        function PricingDetails({ plan = 'basic', onBack }) {
+            const features = {
+                free: [ 'Limit 50 clients', 'Booking & reminders', 'Basic support' ],
+                basic: [ 'Limit 500 clients', 'Booking & reminders', 'Client chat', 'Email reminders', 'Basic reports' ],
+                pro: [ 'Unlimited clients', 'Client chat', 'Email marketing credits', 'Advanced reports', 'Priority support' ],
+                mogul: [ 'All Pro features', 'Dedicated account manager', 'Custom integrations', 'White-glove onboarding' ]
+            };
+            const planTitles = { free: 'Free Starter', basic: 'Basic', pro: 'Pro', mogul: 'Mogul' };
+            const planPrices = { free: 'Free', basic: '$5/mo', pro: '$15/mo', mogul: '$49/mo' };
+            const allFeatures = Array.from(new Set([].concat(...Object.values(features))));
+
+            return (
+                <div className="min-h-screen py-12">
+                    <div className="max-w-4xl mx-auto p-6 bg-black border border-zinc-800 rounded-lg">
+                        <div className="flex items-start justify-between mb-6">
+                            <div>
+                                <h2 className="text-2xl font-bold">{planTitles[plan] || 'Plan Details'}</h2>
+                                <div className="text-zinc-400 text-sm">{planPrices[plan] || ''}</div>
+                            </div>
+                            <div className="flex gap-2">
+                                <button onClick={onBack} className="px-4 py-2 bg-zinc-800 text-white rounded">Back</button>
+                                <a href={`#/plans`} className="px-4 py-2 bg-gold text-black rounded font-bold">Choose Plan</a>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h3 className="text-lg font-bold mb-3">Features</h3>
+                                <ul className="space-y-2">
+                                    {allFeatures.map((f) => {
+                                        const included = (features[plan] || []).includes(f);
+                                        return (
+                                            <li key={f} className={`flex items-start gap-3 text-sm ${included ? 'text-white' : 'text-zinc-500'}`}>
+                                                <span className={`${included ? 'bg-gold text-black' : 'bg-zinc-800 text-zinc-500'} w-6 h-6 rounded flex items-center justify-center`}>{included ? '✓' : '—'}</span>
+                                                <span>{f}</span>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-bold mb-3">Compare Plans</h3>
+                                <div className="space-y-3">
+                                    {['free','basic','pro','mogul'].map(p => (
+                                        <div key={p} className="p-3 border border-zinc-800 rounded flex items-center justify-between">
+                                            <div>
+                                                <div className="font-bold">{planTitles[p]}</div>
+                                                <div className="text-zinc-500 text-sm">{planPrices[p]}</div>
+                                            </div>
+                                            <a href={`#/pricing?plan=${p}`} className={`px-3 py-2 rounded ${p === plan ? 'bg-gold text-black font-bold' : 'bg-zinc-800 text-white'}`}>View</a>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -3260,14 +4116,20 @@
             const [authLoading, setAuthLoading] = useState(true);
             const [showLanding, setShowLanding] = useState(true);
             const [initialMode, setInitialMode] = useState('barber'); // 'barber' or 'client'
-            const [route, setRoute] = useState(window.location.hash === '#/plans' ? 'plans' : '');
+            const [startRegister, setStartRegister] = useState(false); // when true, LoginScreen opens in Register mode
+            const [route, setRoute] = useState(window.location.hash.startsWith('#/plans') ? 'plans' : (window.location.hash.startsWith('#/pricing') ? 'pricing' : ''));
             const [routeParams, setRouteParams] = useState(window.history.state?.signupData || null);
 
             useEffect(() => {
                 const handleRoute = () => {
-                    if (window.location.hash === '#/plans') {
+                    const h = window.location.hash || '';
+                    if (h.startsWith('#/plans')) {
                         setRoute('plans');
                         setRouteParams(window.history.state?.signupData || null);
+                    } else if (h.startsWith('#/pricing')) {
+                        setRoute('pricing');
+                        const qp = new URLSearchParams((h.split('?')[1]) || '');
+                        setRouteParams({ plan: qp.get('plan') || 'basic' });
                     } else {
                         setRoute('');
                         setRouteParams(null);
@@ -3311,7 +4173,7 @@
 
             // 2. If not logged in and landing is active, show Landing
             if (showLanding) {
-                return (<main id="main" role="main" className="container"><LandingPage onEnter={(mode) => { setInitialMode(mode); setShowLanding(false); }} /><Toasts/><ConfirmModal/></main>);
+                return (<main id="main" role="main" className="container"><LandingPage onEnter={(mode) => { if (mode === 'barber_register') { setInitialMode('barber'); setStartRegister(true); } else { setInitialMode(mode); setStartRegister(false); } setShowLanding(false); }} /><Toasts/><ConfirmModal/></main>);
             }
 
             // 3a. If the free plans route is active, show full PlansPage
@@ -3320,19 +4182,20 @@
             }
 
             // 3b. Otherwise show Login/Register (and pass onBack handler)
-            return (<main id="main" role="main" className="container"><LoginScreen initialMode={initialMode} onBack={() => setShowLanding(true)} /><Toasts/><ConfirmModal/></main>);
+            return (<main id="main" role="main" className="container"><LoginScreen initialMode={initialMode} startRegister={startRegister} onBack={() => { setShowLanding(true); setStartRegister(false); }} /><Toasts/><ConfirmModal/></main>);
         }
 
         function RoleRouter({ user }) {
             const [userData, setUserData] = useState(null);
             const [loading, setLoading] = useState(true);
             const [profileError, setProfileError] = useState(null);
+            const [showPlansModal, setShowPlansModal] = useState(false);
 
             function PaymentPending({ profile }) {
                 return (
                     <div className="h-screen flex items-center justify-center p-6">
                         <div className="max-w-md w-full bg-zinc-900 border border-zinc-800 rounded-lg p-6 text-center relative">
-                            <button onClick={() => { try { signOut(auth).catch(()=>{}); window.location.hash = '#/plans'; } catch(e) { try { window.history.back(); } catch(_){} } }} aria-label="Back" title="Back" className="absolute left-3 top-3 p-2 text-zinc-400 hover:text-white">
+                            <button onClick={() => { try { setShowPlansModal(true); } catch(e) { try { window.history.back(); } catch(_){} } }} aria-label="Back" title="Back" className="absolute left-3 top-3 p-2 text-zinc-400 hover:text-white">
                                 <ChevronLeft />
                             </button>
                             <h3 className="text-white font-bold text-lg mb-2">Payment Required</h3>
@@ -3347,6 +4210,13 @@
                             </div>
                             <p className="text-zinc-500 text-xs mt-3">If you completed payment recently, please allow a minute for processing and press "Check Status".</p>
                         </div>
+                        {showPlansModal && (
+                            <div className="fixed inset-0 z-60 flex items-start justify-center p-6">
+                                <div className="w-full max-w-md">
+                                    <PlansPage signupData={{}} onDone={() => { setShowPlansModal(false); }} />
+                                </div>
+                            </div>
+                        )}
                     </div>
                 );
             }
