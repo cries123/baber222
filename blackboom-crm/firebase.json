@@ -24,6 +24,7 @@
     "singleProjectMode": true
   },
   "hosting": {
+    "predeploy": ["npm run build"],
     "public": "public",
     "ignore": [
       "firebase.json",

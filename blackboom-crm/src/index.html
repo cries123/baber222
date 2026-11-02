@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>BlackBook: find a barber and book the chair</title>
+    <meta name="description" content="Find a barber near you, see their menu and open times, and book in seconds. Barbers run their whole day, clients and money from one place.">
+    <meta name="google-site-verification" content="google946d91b92ae68f5c.html">
+    <link rel="canonical" href="https://blackbookcrm.org/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="BlackBook">
+    <meta property="og:title" content="BlackBook: find a barber and book the chair">
+    <meta property="og:description" content="See barbers near you, check their menu and open times, and book in seconds.">
+    <meta property="og:url" content="https://blackbookcrm.org/">
+    <meta property="og:image" content="https://blackbookcrm.org/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="BlackBook: find your barber, book the chair">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://blackbookcrm.org/og-image.jpg">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "BlackBook",
+        "url": "https://blackbookcrm.org/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "Find a barber near you and book online. Barbers manage bookings, clients and earnings in one place."
+    }
+    </script>
+
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="BlackBook">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+    <link rel="stylesheet" href="/app.css?v=__BUILD__">
+
+    <!-- Libraries, pinned. The app itself is precompiled by build.mjs; nothing compiles in the browser. -->
+    <script defer crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+    <script defer crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script defer src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>
+    <script type="module" src="/app.js?v=__BUILD__"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <div id="app-loader" role="status" aria-label="Loading BlackBook" style="position:fixed;inset:0;z-index:9999;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px">
+        <div style="font-family:'Big Shoulders Display','Arial Narrow',sans-serif;font-size:32px;font-weight:900;letter-spacing:.02em;text-transform:uppercase;color:#F2EEE6">Black<span style="color:#C9A13B">Book</span></div>
+        <div style="width:112px;height:2px;background:#2A2622;border-radius:2px;overflow:hidden"><div style="width:40%;height:100%;background:#C9A13B;border-radius:2px;animation:bbLoad 1.1s ease-in-out infinite"></div></div>
+    </div>
+    <noscript>
+        <div style="position:fixed;inset:0;z-index:10000;background:#000;color:#F2EEE6;display:flex;align-items:center;justify-content:center;padding:24px;font-family:system-ui,sans-serif;text-align:center">
+            <div style="max-width:420px">
+                <div style="font-size:32px;font-weight:900;text-transform:uppercase;letter-spacing:.02em">Black<span style="color:#C9A13B">Book</span></div>
+                <p style="color:#A39C90;line-height:1.5">Find a barber near you and book the chair. Booking needs JavaScript, so turn it on and reload. Questions? <a style="color:#C9A13B" href="mailto:support@blackbookcrm.org">support@blackbookcrm.org</a></p>
+            </div>
+        </div>
+    </noscript>
+</body>
+</html>
