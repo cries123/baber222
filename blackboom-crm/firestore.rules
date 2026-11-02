@@ -1,0 +1,190 @@
+rules_version = '2';
+
+// BlackBook Firestore rules.
+// Everything is denied unless a rule below allows it. Public data is limited to what a signed-out
+// visitor needs to find a barber: public barber cards, menus, products and referral codes.
+// The browser can never grant itself a plan, credits or a role; only admin or the server can.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- helpers ----------
+    function signedIn() { return request.auth != null; }
+    function isUser(uid) { return signedIn() && request.auth.uid == uid; }
+
+    // The support account (by its fixed id), or the support email once that email is verified
+    function isAdmin() {
+      return signedIn() && (
+        request.auth.uid == 'kZWA2q1WTrcPUN5ImxAqnSKICjy2'
+        || (request.auth.token.email == 'support@blackbookcrm.org' && request.auth.token.email_verified == true)
+      );
+    }
+
+    function userDoc(uid) { return get(/databases/$(database)/documents/users/$(uid)).data; }
+    function myRole() { return userDoc(request.auth.uid).get('role', ''); }
+
+    // A client can see and book with any barber they have connected to
+    function linkedTo(barberId) {
+      let me = userDoc(request.auth.uid);
+      return me.get('linkedBarberId', '') == barberId || barberId in me.get('barberIds', []);
+    }
+
+    // A barber can see a client's account once that client has connected to them
+    function isClientOf(clientId) {
+      let c = userDoc(clientId);
+      return c.get('linkedBarberId', '') == request.auth.uid || request.auth.uid in c.get('barberIds', []);
+    }
+
+    function changedOnly(fields) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(fields);
+    }
+
+    // Conversation ids are the two account ids, sorted, joined by "_"
+    function convoId(a, b) { return a < b ? a + '_' + b : b + '_' + a; }
+    function inConvo(id) { return signedIn() && request.auth.uid in id.split('_'); }
+
+    // ---------- accounts ----------
+    match /users/{userId} {
+      // Own record; any barber's record (clients need hours and menu settings); a client's record for
+      // the barbers they connected to (names and photos in chat)
+      allow get: if isUser(userId) || isAdmin()
+        || (signedIn() && resource.data.role == 'barber')
+        || (signedIn() && (resource.data.get('linkedBarberId', '') == request.auth.uid
+                           || request.auth.uid in resource.data.get('barberIds', [])));
+      allow list: if isAdmin();
+
+      // Sign-up: clients and barbers only, starting unpaid with no credits
+      allow create: if isUser(userId)
+        && request.resource.data.get('role', '') in ['client', 'barber']
+        && request.resource.data.get('billingConfirmed', false) == false
+        && request.resource.data.get('credits', 0) == 0
+        && !request.resource.data.keys().hasAny(['billingNextDue', 'provider', 'billingUpdatedAt']);
+
+      // Owners edit their own profile, but billing, credits and role are off limits. Switching plans
+      // is allowed only to the free trial, or to a plan that still has to be paid for.
+      allow update: if isAdmin() || (isUser(userId)
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'billingConfirmed', 'billingNextDue', 'credits', 'provider', 'billingUpdatedAt'])
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['plan'])
+            || request.resource.data.plan == 'free_trial'
+            || request.resource.data.get('billingConfirmed', false) == false));
+
+      allow delete: if isAdmin();
+    }
+
+    // Public barber cards for the map and invite links (no email, phone or billing in here)
+    match /barberProfiles/{barberId} {
+      allow read: if true;
+      allow create, update: if isAdmin() || (isUser(barberId) && myRole() == 'barber');
+      allow delete: if isAdmin() || isUser(barberId);
+    }
+
+    // Custom referral codes: anyone can look one up by name, nobody can list them all
+    match /referralCodes/{code} {
+      allow get: if true;
+      allow list: if isAdmin();
+      allow create: if signedIn() && myRole() == 'barber' && request.resource.data.barberId == request.auth.uid;
+      allow update: if isAdmin() || (signedIn() && resource.data.barberId == request.auth.uid && request.resource.data.barberId == request.auth.uid);
+      allow delete: if isAdmin() || (signedIn() && resource.data.barberId == request.auth.uid);
+    }
+
+    // ---------- a barber's business ----------
+    // Roster entries. userId is the barber. A client may see and add their own entry (matched by
+    // their sign-in email) and fill in their account id and photo, nothing else.
+    match /clients/{entryId} {
+      allow read: if isAdmin()
+        || (signedIn() && resource.data.userId == request.auth.uid)
+        || (signedIn() && resource.data.email == request.auth.token.email);
+      allow create: if isAdmin()
+        || (signedIn() && request.resource.data.userId == request.auth.uid)
+        || (signedIn() && request.resource.data.clientUid == request.auth.uid && request.resource.data.email == request.auth.token.email);
+      allow update: if isAdmin()
+        || (signedIn() && resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid)
+        || (signedIn() && resource.data.email == request.auth.token.email
+            && changedOnly(['clientUid', 'photoURL', 'photoPath'])
+            && request.resource.data.get('clientUid', request.auth.uid) == request.auth.uid);
+      allow delete: if isAdmin() || (signedIn() && resource.data.userId == request.auth.uid);
+    }
+
+    // Appointments. userId is the barber, clientId the client who booked online.
+    // Clients connected to a barber can read that barber's bookings, because open times are worked out
+    // in the browser from them. Clients can only create or change their own, and never mark one done.
+    match /appointments/{apptId} {
+      allow read: if isAdmin()
+        || (signedIn() && resource.data.userId == request.auth.uid)
+        || (signedIn() && resource.data.clientId == request.auth.uid)
+        || (signedIn() && linkedTo(resource.data.userId));
+      allow create: if isAdmin()
+        || (signedIn() && request.resource.data.userId == request.auth.uid)
+        || (signedIn() && request.resource.data.clientId == request.auth.uid
+            && request.resource.data.get('status', 'booked') == 'booked'
+            && linkedTo(request.resource.data.userId));
+      allow update: if isAdmin()
+        || (signedIn() && resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid)
+        || (signedIn() && resource.data.clientId == request.auth.uid
+            && request.resource.data.clientId == request.auth.uid
+            && request.resource.data.userId == resource.data.userId
+            && request.resource.data.get('status', 'booked') in ['booked', 'cancelled']);
+      allow delete: if isAdmin() || (signedIn() && resource.data.userId == request.auth.uid);
+    }
+
+    // Menus and products are public (the map shows them); coupons need an account to see
+    match /services/{id} {
+      allow read: if true;
+      allow create: if signedIn() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAdmin() || (signedIn() && resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid);
+      allow delete: if isAdmin() || (signedIn() && resource.data.userId == request.auth.uid);
+    }
+    match /products/{id} {
+      allow read: if true;
+      allow create: if signedIn() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAdmin() || (signedIn() && resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid);
+      allow delete: if isAdmin() || (signedIn() && resource.data.userId == request.auth.uid);
+    }
+    match /coupons/{id} {
+      allow read: if signedIn();
+      allow create: if signedIn() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAdmin() || (signedIn() && resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid);
+      allow delete: if isAdmin() || (signedIn() && resource.data.userId == request.auth.uid);
+    }
+
+    match /pickupOrders/{id} {
+      allow read: if isAdmin() || (signedIn() && (resource.data.clientId == request.auth.uid || resource.data.barberId == request.auth.uid));
+      allow create: if signedIn() && request.resource.data.clientId == request.auth.uid && linkedTo(request.resource.data.barberId);
+      allow update: if isAdmin() || (signedIn() && resource.data.barberId == request.auth.uid);
+      allow delete: if isAdmin();
+    }
+
+    // ---------- chat ----------
+    // Only between a client and a barber they're connected to. The sender can't be faked, and the
+    // recipient can only flip the read and delivered flags.
+    match /messages/{id} {
+      allow read: if isAdmin()
+        || inConvo(resource.data.conversationId)
+        || (signedIn() && resource.data.recipientId == request.auth.uid);
+      allow create: if signedIn()
+        && request.resource.data.senderId == request.auth.uid
+        && request.resource.data.recipientId is string
+        && request.resource.data.conversationId == convoId(request.auth.uid, request.resource.data.recipientId)
+        && (linkedTo(request.resource.data.recipientId) || isClientOf(request.resource.data.recipientId));
+      allow update: if signedIn() && resource.data.recipientId == request.auth.uid && changedOnly(['read', 'delivered']);
+      allow delete: if isAdmin();
+    }
+    match /typing/{conversation} {
+      allow read, write: if inConvo(conversation);
+    }
+
+    // ---------- support ----------
+    match /tickets/{id} {
+      allow read: if isAdmin() || (signedIn() && resource.data.userId == request.auth.uid);
+      allow create: if signedIn() && request.resource.data.userId == request.auth.uid && request.resource.data.get('status', 'open') == 'open';
+      allow update: if isAdmin() || (signedIn() && resource.data.userId == request.auth.uid && changedOnly(['messages']));
+      allow delete: if isAdmin();
+    }
+
+    // ---------- admin only ----------
+    // Discount codes, logs, analytics, and anything not named above.
+    // Payment records (pendingPayments) are written by the server, which bypasses these rules.
+    match /{path=**} {
+      allow read, write: if isAdmin();
+    }
+  }
+}
