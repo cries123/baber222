@@ -3840,10 +3840,12 @@ function useSiteMotion(scopeRef, setup) {
         const g = window.gsap, ST = window.ScrollTrigger;
         if (!g || !ST || !scopeRef.current || prefersReducedMotion()) return;
         g.registerPlugin(ST);
+        ST.config({ ignoreMobileResize: true });
         let lenis = null;
         const tick = (t) => lenis && lenis.raf(t * 1000);
-        if (window.Lenis) {
-            lenis = new window.Lenis({ lerp: 0.12, smoothWheel: true }); // touch keeps native scrolling
+        // Smooth scrolling is for mouse and trackpad only. Phones (and home-screen apps) keep plain native scrolling.
+        if (window.Lenis && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            lenis = new window.Lenis({ lerp: 0.12, smoothWheel: true });
             lenis.on('scroll', ST.update);
             g.ticker.add(tick);
             g.ticker.lagSmoothing(0);
@@ -3875,7 +3877,7 @@ const scrollToId = (id) => {
     const el = document.getElementById(id);
     if (!el) return;
     if (window.__lenis) window.__lenis.scrollTo(el, { offset: -72 });
-    else el.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+    else window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 72, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
 };
 
 // Heading split into words for the reveal. Screen readers get the plain sentence.

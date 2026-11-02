@@ -177,8 +177,7 @@ input[type="checkbox"] { accent-color: var(--gold); }
 /* Landing load sequence: headline lines rise in turn, then the ticket is set down on the counter */
 .enter-up { opacity: 0; transform: translateY(14px); animation: enterUp 650ms var(--ease-out) forwards; }
 @keyframes enterUp { to { opacity: 1; transform: none; } }
-.hero-ticket { transform: rotate(-3deg); animation: ticketIn 800ms var(--ease-out) 420ms both; }
-@keyframes ticketIn { from { opacity: 0; transform: translateY(36px) rotate(-9deg); } to { opacity: 1; transform: rotate(-3deg); } }
+.hero-ticket { transform: rotate(-3deg); } /* GSAP sets it down on arrival; no CSS animation competing for the same properties */
 
 /* Scroll reveal (landing). JS adds .is-in once the element is on screen */
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); transition-delay: var(--d, 0ms); }
@@ -233,7 +232,6 @@ input[type="checkbox"] { accent-color: var(--gold); }
     .bb-me::after, .gradient-anim, .animate-bounce { animation: none !important; }
     .bb-pin.is-active span { transform: rotate(-45deg); }
     .bb-sheet { animation-name: fadeIn !important; }
-    .hero-ticket { animation-name: fadeIn !important; }
     .btn:active:not(:disabled) { transform: none; }
 }
 
